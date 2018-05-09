@@ -1,0 +1,120 @@
+/* ALL TOGETHER THAT MIGHT BE USEFULL
+
+.property
+  &__heading
+    margin: 0
+    position: relative
+    color: $fontColor
+    padding-bottom: 12px
+    font-size: 24px
+    font-family: $noto
+    font-weight: 700
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      left: 0%
+      bottom: 0
+      size: 50px 1px
+      background: rgba($fontColor, .15)
+
+  &__back
+    display: flex
+    width: auto
+    max-width: 160px
+    align-items: center
+    font-size: 14px
+    font-weight: 700
+    font-family: $noto
+    color: rgba($fontColor, .5)
+    .ico
+      font-size: 8px
+      margin-top: 2px
+      transition: .25s $ease
+    span
+      margin-left: 10px
+      letter-spacing: 0.032em
+      transition: .25s $ease
+    &:hover
+      span
+        color: $fontColor
+      .ico
+        transform: translateX(-5px)
+
+  &__map
+    height: 340px
+    margin: 20px 0
+    *
+      -webkit-print-color-adjust: exact
+      print-color-adjust: exact
+    &-static
+      display: none
+      img
+        width: 100%
+    > div
+      width: 100%
+      height: 100%
+
+
+/* blog content
+.post
+
+  &__title
+    font-size: 40px
+    line-height: 1.25
+    font-family: $noto
+    font-weight: 700
+    margin: 30px 0 30px
+
+  &__content
+    max-width: 640px
+    margin-left: auto
+    margin-right: auto
+
+    h2, h3, h4
+      font-weight: 700
+      line-height: 1.375
+      letter-spacing: 0.005em
+      margin-bottom: 1.2em
+
+    h2
+      font-size: 24px
+
+    h3
+      font-size: 18px
+
+    p
+      font-size: 18px
+      letter-spacing: 0.02em
+      line-height: 1.62
+      margin-bottom: 1.5em
+
+    figure
+      flex: 0 1 100%
+      width: 100%
+      margin: 0 0 1em 0
+      img
+        width: 100%
+        border-radius: 4px
+
+    figcaption
+      text-align: center
+      font-size: 12px
+      margin: 1em 0
+      color: rgba($fontColor, .5)
+      letter-spacing: 0.01em
+
+
+.resize-iframe
+  max-width: 100%
+  margin: 0px auto
+  &__16-9
+    position: relative
+    padding-bottom: 56.25%
+    height: 0px
+    iframe
+      position: absolute
+      top: 0px
+      left: 0px
+      width: 100%
+      height: 100%

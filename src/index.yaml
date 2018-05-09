@@ -1,0 +1,13 @@
+ProjectTitle: NMH
+
+PageList:
+- file: homepage.html
+  ready: 10
+- file: property-list.html
+  ready: 10
+- file: property-add.html
+  ready: 10
+- file: categories.html
+  ready: 10
+- file: tags.html
+  ready: 10

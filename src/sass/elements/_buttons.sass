@@ -1,0 +1,66 @@
+// buttons
+button
+  -webkit-apperance: none
+  border: 0
+  box-shadow: none
+  cursor: pointer
+  &:focus
+    outline: none
+
+.btn
+  display: inline-block
+  position: relative
+  text-align: center
+  transition: all $transitionSpeed ease-in-out
+  &:focus, &:active
+    outline: none
+  &--block
+    display: block
+    width: 100%
+
+  &-primary
+    background: $colorPrimary
+    color: white
+    font-size: 14px
+    font-weight: 700
+    font-family: $noto
+    border-radius: 4px
+    text-transform: uppercase
+    letter-spacing: 0.056em
+    box-shadow: 0px 5px 15px rgba(#D9D8D8, .5)
+    padding: 17px
+    &:hover
+      background: darken($colorPrimary, 10%)
+      box-shadow: none
+
+  &-outline
+    background: transparent
+    color: $fontColor
+    font-size: 14px
+    font-weight: 700
+    border-radius: 4px
+    text-transform: lowercase
+    letter-spacing: 0.032em
+    border: 1px solid rgba($fontColor, .5)
+    padding: 6px 10px
+    &:hover
+      background: $fontColor
+      color: white
+      box-shadow: none
+
+  &-white
+    background: white
+    color: $fontColor
+    font-family: $noto
+    font-size: 14px
+    font-weight: 700
+    border-radius: 8px
+    text-transform: lowercase
+    letter-spacing: 0.1em
+    border: 1px solid transparent
+    text-transform: uppercase
+    padding: 9px 35px
+    &:hover
+      background: $colorPrimary
+      color: white
+      box-shadow: none

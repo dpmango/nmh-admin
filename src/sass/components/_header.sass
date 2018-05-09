@@ -1,0 +1,89 @@
+/* HEADER
+.header
+  position: absolute
+  top: 0
+  right: 0
+  left: 0
+  z-index: 10
+  background: white
+  &-container
+    border-bottom: 1px solid #E6E6E6
+
+  &__wrapper
+    display: flex
+    align-items: center
+    height: 60px
+    color: $fontColor
+
+  &__logo
+    position: relative
+    // flex: 0 0 103px
+    flex: 0 0 auto
+    font-size: 0
+    padding-right: 30px
+    color: $fontColor
+    transition: .25s $ease
+    .ico
+      font-size: 29px
+      overflow: hidden
+    &:hover
+      opacity: .8
+
+  &__cta
+    margin-left: auto
+    padding-left: 30px
+    display: flex
+    align-items: center
+
+  &__user
+    padding-left: 20px
+    &-wrap
+      display: flex
+      align-items: center
+    &-name
+      font-size: 14px
+      font-weight: 700
+      margin-right: 20px
+
+    &-avatar
+      position: relative
+      z-index: 1
+      border-radius: 50%
+      overflow: hidden
+      size: 40px
+      flex: 0 0 40px
+      font-size: 0
+      user-select: none
+      pointer-events: none
+      img
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%,-50%)
+        width: 100%
+
+
+  &.is-fixed
+    transform: translate3d(0,-100%,0)
+    background: white
+    transition: .25s $ease
+    .header
+      &__logo
+        color: $fontColor
+      &__wrapper
+        color: $fontColor
+
+  &.is-fixed-visible
+    position: fixed
+    transform: translate3d(0,0,0)
+
+
++r($desktop)
+  .header
+    &__wrapper
+      height: 48px
+    &__logo
+      // flex-basis: 60px
+      padding-right: 0
+      .ico
+        font-size: 24px
