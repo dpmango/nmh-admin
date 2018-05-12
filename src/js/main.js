@@ -92,6 +92,10 @@ $(document).ready(function(){
     .on('click', '[href="#"]', function(e) {
   		e.preventDefault();
   	})
+    .on('click', '.c-seo a', function() {
+      $(this).parents('.content__item').toggleClass('is-open');
+      $(this).parents('.content__item').find('.c-edit').slideToggle();
+    })
 
 
   //////////

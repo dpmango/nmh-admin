@@ -1,0 +1,46 @@
+.content
+	&.without-search
+		padding-top: 85px
+		.content__search
+			display: none
+	&__grid
+		&.item--2rows
+			.content__item
+				flex-wrap: wrap
+	&__item
+		&.is-open
+			.c-seo
+				a
+					font-weight: 700
+
+.c-head
+	width: 100%
+	display: flex
+	align-items: center
+	justify-content: flex-start
+	min-height: 60px
+	// border-bottom: 1px solid #F6F6F6
+.c-edit
+	background: #F6F6F6
+	width: 100%
+	padding: 20px 0 30px
+	display: none
+	
+	.ui-group
+		max-width: 100%
+		input
+			font-size: 18px
+			&[readonly]
+				opacity: 0.6
+				outline: none
+				border-color: #fff
+		textarea
+			padding: 30px 20px
+			height: 295px
+			resize: none
+			line-height: 1.25
+			font-size: 14px
+	.buttons
+		text-align: right
+		button
+			margin-left: 20px

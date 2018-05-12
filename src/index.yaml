@@ -11,3 +11,5 @@ PageList:
   ready: 10
 - file: tags.html
   ready: 10
+- file: Login.html
+  ready: 10

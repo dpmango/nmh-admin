@@ -1,0 +1,22 @@
+---
+title: Login title
+---
+extends shared/_layout
+
+block content
+  block header
+  // login page
+  .container
+    .login
+      .login__heading
+        .login__logotype
+          +icon('ico-logo')
+        h2.login__title.wow.wowFadeUp Позвольте найти ваш дом
+      form.wow.wowFadeUp(data-animation-delay='.1s' action="#" method="#")
+        .ui-group
+          input(type="text" placeholder="email")
+        .ui-group
+          input(type="password" placeholder="пароль")
+        .ui-group
+          button.btn.btn-primary(type="submit") Войти
+  block footer
