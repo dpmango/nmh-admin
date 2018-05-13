@@ -1,0 +1,63 @@
+.right
+	max-width: 210px
+	width: 100%
+	margin-left: 25px
+	margin-top: 141px
+	margin-bottom: 62px
+	p
+		margin: 0
+	&__container
+		background: #fff
+		border-radius: 4px
+		border: 1px solid $borderColor
+		padding: 14px 20px
+		margin: 5px auto 20px
+	.ui-group
+		margin-bottom: 0
+
+.p-label
+	font-size: 12px
+	line-height: 1.25
+	margin: 0
+	padding: 0
+	color: rgba($fontColor, 0.5)
+
+
+.tags
+	display: flex
+	width: 100%
+	justify-content: flex-start
+	padding: 0
+	flex-direction: column-reverse
+	margin: 5px auto
+	li
+		margin-bottom: 5px
+		position: relative
+		padding: 0
+		margin: 4px auto
+		text-align: left
+		width: 100%
+		font-size: 14px
+		color: $fontColor
+		&.addedTag
+			background: #fff
+			padding-left: 20px
+			overflow: hidden
+			text-overflow: ellipsis
+		input
+			border-radius: 4px
+			border: 1px solid $borderColor
+			padding: 8px 10px
+
+	span.tagRemove
+		cursor: pointer
+		display: block
+		position: absolute
+		left: 0
+		top: 50%
+		transform: translateY(-50%)
+		width: 10px
+		height: 10px
+		background: url(../img/delete.svg) center center no-repeat
+		background-size: contain
+	

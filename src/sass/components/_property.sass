@@ -1,0 +1,105 @@
+.property
+	width: 100%
+	padding-top: 62px
+	position: relative
+	padding-bottom: 100px
+	position: relative
+	z-index: 2
+	&__info
+		background: #fff
+		border-radius: 4px
+		border: 1px solid $borderColor
+		display: flex
+		padding: 15px
+		align-items: center
+		justify-content: flex-start
+		position: absolute
+		left: 0
+		top: 0
+		width: calc(100% + 235px)
+		&--bottom-position
+			bottom: 0
+			top: auto
+		p
+			margin: 0
+			margin: 0
+			font-size: 14px
+			color: $fontColor
+			opacity: 0.5
+			margin-right: 25px
+	&__buttons
+		margin-left: auto
+		.btn
+			font-size: 14px
+			text-transform: none
+			font-weight: 400
+			padding: 6px 16px
+			margin-left: 15px
+	&__heading
+		margin: 30px auto
+	&__container
+		background: #fff
+		border-radius: 4px
+		border: 1px solid $borderColor
+		padding: 20px
+		.ui-group
+			&:last-child
+				margin-bottom: 0
+		.p-label
+			margin-bottom: 5px
+		label
+			color: #90A1B5
+		input
+			border: 1px solid $borderColor
+			font-size: 14px
+			padding: 12px 20px
+		textarea
+			border: 1px solid $borderColor
+			min-height: 100px
+			resize: none
+			font-size: 14px
+			line-height: 1.4
+			padding: 12px 20px
+	&__grid
+		display: flex
+		justify-content: space-between
+		margin-bottom: 20px
+		.ui-group
+			margin-bottom: 0
+		&.items-url
+			align-items: center
+			p.p-url
+				font-size: 14px
+				margin: 0
+				margin-right: 10px
+				color: rgba($fontColor, 0.3)
+			.ui-group
+				width: 100%
+		&.items-6
+			.ui-group
+				input
+					padding: 12px 15px
+				margin: 0 2%
+				&:first-child
+					margin-left: 0
+				&:last-child
+					margin-right: 0
+		&.items-4
+			.ui-group
+				margin-top: 5px
+				width: 22%
+		&.items-3
+			.ui-group
+				margin-top: 5px
+				width: 30%
+		&.no-margin
+			margin-bottom: 0
+		// input
+		// 	padding: 12px 20px
+	&__map
+		min-height: 320px
+		background: #a2a2a2
+		margin: 0
+
+.input-price
+	min-width: 140px

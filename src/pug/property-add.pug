@@ -1,0 +1,169 @@
+---
+title: Property-add title
+---
+extends shared/_layout
+
+block content
+  // Property-add page
+  .admin
+    .container
+      .admin__wrapper
+        // Include sidebar
+        include components/_sidebar
+        .property
+          form(action="#" method="#")
+            .property__info
+              p #4230 (опубликован)
+              p 12.04.2017 (обновлен 16.06.2018)
+              .property__buttons
+                button.btn.btn-cancel удалить
+                button.btn.btn-primary сохранить
+            h3.property__heading Об объекте
+            .property__container
+              p.p-label Url
+              .property__grid.items-url
+                p.p-label
+                p.p-url https://newmoscowhouse.ru/property/
+                .ui-group
+                  input(type="text" value="dom-kp-vatutinki")
+              .ui-group
+                p.p-label Название
+                input(type="text" value="Дом с ремонтом “под ключ” в КП “Ватутинки”")
+              .ui-group
+                p.p-label YouTube
+                input(type="text" placeholder="https://youtu.be/rN6nlNC9WQA")
+              .property__grid.items-6
+                .ui-group
+                  label Кв.м
+                  input(type="text" value="325")
+                .ui-group
+                  label Спальни
+                  input(type="text" value="5")
+                .ui-group
+                  label С/у
+                  input(type="text" value="")
+                .ui-group
+                  label Эт/ур.
+                  input(type="text" value="2/3")
+                .ui-group
+                  label Участок
+                  input(type="text" value="")
+                .ui-group
+                  label Цена
+                  input.input-price(type="text" value="15 000 000")
+              .property__grid.items-3.no-margin
+                .ui-group
+                  label Тип дома
+                  select(js-selectric).bordered
+                    option Кирпичный
+                    option Монолитный
+                    option Деревянный
+                    option Щитовой
+                .ui-group
+                  label Ремонт
+                  select(js-selectric).bordered
+                    option Под ключ
+                    option Под чистовую отделку
+                    option Без отделки
+                .ui-group
+                  label Участок
+                  select(js-selectric).bordered
+                    option ИЖС
+                    option ЛПХ
+                    option ДНП
+                    option Садоводство
+                    option Фермерское хоз-во
+                    option Земля промназначения
+            h3.property__heading Описание
+            .property__container
+              .ui-group
+                p.p-label Краткое описание (3-4 предложения)
+                textarea
+              .ui-group
+                p.p-label Поэтажное описание (3-4 предложения)
+                textarea
+              .ui-group
+                p.p-label Поэтажное описание (3-4 предложения)
+                textarea
+              p.p-label Поэтажное описание (3-4 предложения)
+              .property__grid.items-4.no-margin
+                .ui-group
+                  label Газ
+                  select(js-selectric).bordered
+                    option Да
+                    option Нет
+                .ui-group
+                  label Электричество
+                  select(js-selectric).bordered
+                    option Да
+                    option Нет
+                .ui-group
+                  label Канализация
+                  select(js-selectric).bordered
+                    option Да
+                    option Нет
+                .ui-group
+                  label Водоснабжение
+                  select(js-selectric).bordered
+                    option Да
+                    option Нет
+            h3.property__heading Расположение
+            .property__container
+              .property__grid.items-3
+                .ui-group
+                  label Регион
+                  select(js-selectric).bordered
+                    option Москва
+                    option Санкт-Петербург
+                .ui-group
+                  label Округ
+                  select(js-selectric).bordered
+                    option Новомосковский
+                    option Центральный
+                .ui-group
+                  label Поселение
+                  select(js-selectric).bordered
+                    option Десеновское
+                    option Воскресенское
+                    option Внуковское
+              .property__grid.items-3
+                .ui-group
+                  label Населенный пункт
+                  select(js-selectric).bordered
+                    option Москва
+                    option Санкт-Петербург
+                .ui-group
+                  label Шоссе
+                  select(js-selectric).bordered
+                    option Новомосковский
+                    option Центральный
+                .ui-group
+                  label км от МКАД
+                  input(type="text" value="25")
+              .ui-group
+                input(type="text" placeholder="Поиск адреса на карте")
+              .ui-group
+                .property__map
+                  #property-map
+            h3.property__heading Фотографии
+            .property__container
+            h3.property__heading Планировки
+            .property__container
+            h3.property__heading SEO
+            .property__container
+              .ui-group
+                p.p-label SEO Заголовок
+                input(type="text" value="Дом с ремонтом “под ключ” в КП “Ватутинки”")
+              .ui-group
+                p.p-label SEO Описание
+                textarea Участок 8 соток в коттеджном поселке бизнес-класса "Зеленые холмы", Киевское шоссе, Новая Москва. К участку подведены все центральные коммуникации.
+
+            .property__info.property__info--bottom-position
+              p #4230 (опубликован)
+              p 12.04.2017 (обновлен 16.06.2018)
+              .property__buttons
+                button.btn.btn-cancel удалить
+                button.btn.btn-primary сохранить
+
+        include components/_right-sidebar
+  //- block footer

@@ -1,0 +1,46 @@
+// Right-Sidebar
+.right
+	.right__wrapper(js-sticky)
+		p.p-label Категория
+		.right__container
+			.ui-checkbox
+				label Дом
+					input(type="checkbox")
+					span
+			.ui-checkbox
+				label Таунхаус
+					input(type="checkbox")
+					span
+			.ui-checkbox
+				label Земельный участок
+					input(type="checkbox")
+					span
+		p.p-label Статус
+		.right__container
+			.ui-checkbox
+				label Продан
+					input(type="checkbox")
+					span
+			.ui-checkbox
+				label Резерв
+					input(type="checkbox")
+					span
+			.ui-checkbox
+				label Эксклюзив
+					input(type="checkbox")
+					span
+		p.p-label Теги
+		.right__container
+			ul.tags
+				li.addedTag Web Deisgn
+					span.tagRemove
+					input(type="hidden", name="tags[]", value="Web Deisgn")
+				li.addedTag Web Develop
+					span.tagRemove
+					input(type="hidden", name="tags[]", value="Web Develop")
+				li.addedTag SEO
+					span.tagRemove
+					input(type="hidden", name="tags[]", value="SEO")
+				li.tagAdd.taglist
+					.ui-group
+						input#search-field(type="text")
