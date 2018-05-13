@@ -24,7 +24,7 @@ $(document).ready(function(){
   ////////////
   function pageReady(){
     legacySupport();
-
+    initSticky();
     initSelectric();
     initMasks();
     initPerfectScrollbar();
@@ -172,6 +172,19 @@ $(document).ready(function(){
   // UI
   ////////////
 
+  // sticky kit
+  function initSticky(){
+    var sticky = $('[js-sticky]');
+
+    if ( sticky.length > 0 ){
+      sticky.each(function(i, el){
+        $(el).stick_in_parent({
+          offset_top: 25
+        })
+
+      })
+    }
+  }
 
   // selectric
 

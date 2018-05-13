@@ -1,17 +1,18 @@
 // Sidebar
 .sidebar
-  a.sidebar__index(href="#") Главная
-  ul.sidebar__main
-    li
-      a(href="#") Недвижимость
-      ul.sidebar__secondary
-        li
-          a(href="#") Все записи
-        li
-          a(href="#") Черновики
-        li
-          a(href="#") Категории
-        li.is-active
-          a(href="#") Теги
-    li
-      a(href="#") Блог
+  .sidebar__wrapper(js-sticky)
+    a.sidebar__index(href="#") Главная
+    ul.sidebar__main
+      li
+        a(href="#") Недвижимость
+        ul.sidebar__secondary
+          li
+            a(href="#") Все записи
+          li
+            a(href="#") Черновики
+          li
+            a(href="#") Категории
+          li.is-active
+            a(href="#") Теги
+      li
+        a(href="#") Блог
