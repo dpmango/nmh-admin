@@ -1,0 +1,32 @@
+---
+title: Property-add title
+---
+extends shared/_layout
+
+block content
+  // Property-add page
+  .admin
+    .container
+      .admin__wrapper
+        // Include sidebar
+        include components/_sidebar
+        .property__list-content
+          .property__head
+            .property__item
+              p.p-light Поиск
+              .ui-group.ui-group--search.ui-group--tags
+                input(type="text" placeholder="поиск по тегам")
+                +icon('ico-search')
+            .property__item
+              p.p-light Категория
+              .ui-group
+                select(js-selectric).bordered
+                  option Все обьекты
+                  option Дома
+                  option Таунхаусы
+                  option Участки
+            .property__item.property__item-date
+              p.p-light Период публикации
+              .ui-group.ui-group--date
+                input.datepicker(type='text' data-range='true' data-multiple-dates-separator=' - ')
+  //- block footer

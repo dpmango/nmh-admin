@@ -6,10 +6,10 @@ PageList:
 - file: property-list.html
   ready: 10
 - file: property-add.html
-  ready: 10
+  ready: 70
 - file: categories.html
-  ready: 10
+  ready: 70
 - file: tags.html
-  ready: 10
+  ready: 70
 - file: Login.html
-  ready: 10
+  ready: 70

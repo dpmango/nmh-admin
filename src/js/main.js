@@ -31,6 +31,7 @@ $(document).ready(function(){
     initAutocompleate();
     initValidations();
     initMaps();
+    initDatepicker();
 
     // development helper
     _window.on('resize', debounce(setBreakpoint, 200))
@@ -443,6 +444,11 @@ $(document).ready(function(){
     }
 
   }
+
+  function initDatepicker(){
+    $('.datepicker').datepicker();
+    $('.datepicker').data('datepicker');
+  };
 
   ////////////////
   // FORM VALIDATIONS
