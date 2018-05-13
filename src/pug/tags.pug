@@ -5,170 +5,135 @@ extends shared/_layout
 
 block content
   // Tags page
-  .items
+  .admin
     .container
-
-      // Include sidebar
-      include components/_sidebar
-      .content
-        .content__search
-          p.p-light поиск
-          .ui-group.ui-group--search
-            input(type="text" placeholder="поиск по тегам")
-            +icon('ico-search')
-        .content__table
-          p.p-light 3 тега
-          .content__grid
-            .content__head
-              .c-link
+      .admin__wrapper
+        // Include sidebar
+        include components/_sidebar
+        .content
+          .content__search
+            p.p-light поиск
+            .ui-group.ui-group--search.ui-group--tags
+              input(type="text" placeholder="поиск по тегам")
+              +icon('ico-search')
+          .content__main
+            p.p-light 3 тега
+            .content__table
+              .content__head
+                .c-info.c-link
+                  .c-icon
+                    +icon('ico-icon_link')
+                .c-info.c-number №
+                .c-info.c-name Название
+                .c-info.c-objects Объектов
+                .c-info.c-seo SEO
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 1
+                .c-info.c-name КП “Ватутинки”КП “Ватутинки”
+                .c-info.c-objects 85
+                .c-info.c-seo 
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 2
+                .c-info.c-name У воды
+                .c-info.c-objects 36
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 3
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 4
+                .c-info.c-name Элитный поселок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 5
+                .c-info.c-name КП "Зеленые холмы"
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 6
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 7
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 8
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 9
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+              .content__item
+                .c-info.c-link
+                  a(href="#")
+                    +icon('ico-icon_link')
+                .c-info.c-number 10
+                .c-info.c-name Лесной участок
+                .c-info.c-objects 13
+                .c-info.c-seo
+                  a(href="#") редактировать
+          // pagination
+          .pagination
+            .pagination__scope 11-20 из 132
+            .pagination__list
+              li.pagination__prev
                 a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p №
-              .c-name
-                p Название
-              .c-objects
-                p Объектов
-              .c-seo
-                p SEO
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 1
-              .c-name
-                p КП “Ватутинки”КП “Ватутинки”
-              .c-objects
-                p 85
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 2
-              .c-name
-                p У воды
-              .c-objects
-                p 36
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 3
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 4
-              .c-name
-                p Элитный поселок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 5
-              .c-name
-                p КП "Зеленые холмы"
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 6
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 7
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 8
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 9
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-            .content__item
-              .c-link
-                a(href="#")
-                  +icon('ico-icon_link')
-              .c-number
-                p 10
-              .c-name
-                p Лесной участок
-              .c-objects
-                p 13
-              .c-seo
-                a(href="#") редактировать
-        // pagination
-        .pagination
-          .pagination__scope 11-20 из 132
-          .pagination__list
-            li.pagination__prev
-              a(href="#")
-                +icon('ico-arrow-left')
-                span предыдущая
-            li
-              a(href="#") 1
-            li.is-active
-              a(href="#") 2
-            li
-              a(href="#") 3
-            li.pagination__last
-              a(href="#") 
-                span следующая
-                +icon('ico-arrow-right')
-
+                  +icon('ico-arrow-left')
+                  span предыдущая
+              li
+                a(href="#") 1
+              li.is-active
+                a(href="#") 2
+              li
+                a(href="#") 3
+              li.pagination__last
+                a(href="#") 
+                  span следующая
+                  +icon('ico-arrow-right')
       
   block footer

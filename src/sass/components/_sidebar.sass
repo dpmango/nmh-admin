@@ -1,47 +1,53 @@
 .sidebar
 	min-width: 190px
-	margin-right: 30px
+	margin-right: 10px
+	padding-top: 10px
 	&__index
 		font-size: 16px
-		opacity: 0.09
 		margin: 0
-		color: $fontColor
+		color: rgba($fontColor, 0.09)
 	ul
-		margin: 0
 		padding: 0
-		li
-			display: list-item
 	&__main
+		margin: 0
 		li
-			margin-top: 30px
-		&-link
+			margin-top: 21px
+			display: list-item
+		a
 			font-size: 16px
 			color: $fontColor
 			text-decoration: none
+			width: 100%
+			display: block
+			padding: 9px 0 9px
+			transition: all $transitionSpeed ease-in-out
+			// &:hover
+				// background: darken(#F6F6F6, 3%)
+				// font-weight: 700
+			
 	&__secondary
+		margin-top: 8px
 		li
-			margin-top: 20px
+			margin: 0 auto 6px
 			position: relative
+			display: list-item
 			&.is-active
 				font-weight: 700
 				&:after
 					display: block
 					content: ''
 					width: 3px
-					height: 120%
+					height: 100%
 					position: absolute
 					left: 0
-					top: -10%
+					top: 0
 					background: $colorPrimary
 					border-radius: 10px
 					box-shadow: 0 0 1px 0 rgba(0,0,0,0.35)
-					
-
-		&-link
+		a
 			font-size: 14px
-			color: $fontColor
-			text-decoration: none
-			display: block
-			width: 100%
-			// outline: 1px solid red
-			padding: 2px 0 2px 20px
+			padding-left: 20px
+			&:hover
+				background: 
+				background: darken(#F6F6F6, 3%)
+				// font-weight: 700

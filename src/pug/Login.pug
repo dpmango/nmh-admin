@@ -12,11 +12,11 @@ block content
         .login__logotype
           +icon('ico-logo')
         h2.login__title.wow.wowFadeUp Позвольте найти ваш дом
-      form.wow.wowFadeUp(data-animation-delay='.1s' action="#" method="#")
+      form.login__form.wow.wowFadeUp(data-animation-delay='.1s' action="#" method="#")
         .ui-group
           input(type="text" placeholder="email")
         .ui-group
           input(type="password" placeholder="пароль")
-        .ui-group
+        .login__cta
           button.btn.btn-primary(type="submit") Войти
   block footer

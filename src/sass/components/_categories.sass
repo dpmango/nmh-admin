@@ -3,7 +3,7 @@
 		padding-top: 85px
 		.content__search
 			display: none
-	&__grid
+	&__table
 		&.item--2rows
 			.content__item
 				flex-wrap: wrap
@@ -12,22 +12,9 @@
 			.c-seo
 				a
 					font-weight: 700
-
-.c-head
-	width: 100%
-	display: flex
-	align-items: center
-	justify-content: flex-start
-	min-height: 60px
-	// border-bottom: 1px solid #F6F6F6
-.c-edit
-	background: #F6F6F6
-	width: 100%
-	padding: 20px 0 30px
-	display: none
-	
-	.ui-group
-		max-width: 100%
+	&__form
+		.ui-group
+			max-width: 100%
 		input
 			font-size: 18px
 			&[readonly]
@@ -40,7 +27,20 @@
 			resize: none
 			line-height: 1.25
 			font-size: 14px
-	.buttons
+	&__buttons
 		text-align: right
 		button
 			margin-left: 20px
+
+.c-head
+	width: 100%
+	display: flex
+	align-items: center
+	justify-content: flex-start
+	min-height: 60px
+
+.c-edit
+	background: #F6F6F6
+	width: 100%
+	padding: 20px 0 30px
+	display: none
