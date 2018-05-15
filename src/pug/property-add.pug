@@ -144,9 +144,19 @@ block content
                 input(type="text" placeholder="Поиск адреса на карте")
               .ui-group
                 .property__map
-                  #property-map
+                  //- #property-map
             h3.property__heading Фотографии
             .property__container
+              .add-photos.dropzone.needsclick(action='/upload')
+                .dz-message.needsclick
+                  | Drop files here or click to upload.
+                  br
+                  span.note.needsclick
+                    | (This is just a demo dropzone. Selected 
+                    | files are 
+                    strong not
+                    |  actually uploaded.)
+
             h3.property__heading Планировки
             .property__container
             h3.property__heading SEO

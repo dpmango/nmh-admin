@@ -39,7 +39,7 @@
 		width: 100%
 		font-size: 14px
 		color: $fontColor
-		&.addedTag
+		&.tags__added
 			background: #fff
 			padding-left: 20px
 			overflow: hidden
@@ -49,7 +49,7 @@
 			border: 1px solid $borderColor
 			padding: 8px 10px
 
-	span.tagRemove
+	span[js-remove-tag]
 		cursor: pointer
 		display: block
 		position: absolute
@@ -58,6 +58,7 @@
 		transform: translateY(-50%)
 		width: 10px
 		height: 10px
-		background: url(../img/delete.svg) center center no-repeat
+		// background: url(../img/delete.svg) center center no-repeat
+		background: svg-load('../icons/delete.svg', fill=#000) center center no-repeat
 		background-size: contain
 	
