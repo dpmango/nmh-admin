@@ -74,17 +74,35 @@ $(document).ready(function() {
     // COMMON
     //////////
 
+    // MAGNIFIC POPUPS - PREVIEW IMAGE ON PROPERTY LIST PAGE
+
+    // Image popups
+    $('[js-open-image]').magnificPopup({
+      type: 'image',
+      removalDelay: 500,
+      callbacks: {
+        beforeOpen: function() {
+           this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+           this.st.mainClass = this.st.el.attr('data-effect');
+        }
+      },
+      closeOnContentClick: true,
+      midClick: true
+    });
+
     // ON HOVER PROPERTY LIST CHANGE
 
-    _document
-        .on('mouseover', '.property__change', function(e) {
-            $(this).find('.property__change-links').fadeIn();
-        })
-
-    _document
-        .on('mouseout', '.property__change' && '.property__change-links',  function(e) {
-            $(this).find('.property__change-links').fadeOut();
-        })
+    $('.property__change').hover(function(e) {
+        e.preventDefault();
+        $(this).parent().css('z-index', '5');
+        $(this).find('.property__change-links').fadeIn();
+    },
+    function() {
+        setTimeout(function() {
+            $('.property__list-item td').css('z-index', '0');
+        }, 250);
+        $('.property__change-links').fadeOut();
+    });
 
     // DATEPICKER
 
@@ -124,15 +142,15 @@ $(document).ready(function() {
             return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
         };
     });
-    $(document).ready(function() {
-        $(document).on('click', '[js-remove-tag]', function(event) {
+    _document.ready(function() {
+        _document.on('click', '[js-remove-tag]', function(event) {
             event.preventDefault();
             $(this).parent().remove();
         });
-        $('ul.tags').click(function() {
+        _document.on('click', 'ul.tags', function() {
             $('[js-search-field]').focus();
         });
-        $('[js-search-field]').keypress(function(event) {
+        _document.on('keypress', '[js-search-field]', function(event) {
             if (event.which == '13') {
                 if (($(this).val() != '') && ($(".tags .tags__added:contains('" + $(this).val() + "') ").length == 0)) {
 
