@@ -1,10 +1,8 @@
 ProjectTitle: NMH
 
 PageList:
-- file: homepage.html
-  ready: 10
 - file: property-list.html
-  ready: 10
+  ready: 70
 - file: property-add.html
   ready: 70
 - file: categories.html
@@ -13,3 +11,5 @@ PageList:
   ready: 70
 - file: Login.html
   ready: 70
+- file: styleguide.html
+  ready: 10

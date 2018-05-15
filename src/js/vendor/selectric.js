@@ -236,7 +236,7 @@
 
       // Disable on mobile browsers
       if ( _this.options.disableOnMobile && _this.utils.isMobile() ) {
-        _this.disableOnMobile = true;
+        _this.disableOnMobile = false;
         return;
       }
 
@@ -1092,7 +1092,7 @@
     keySearchTimeout     : 500,
     arrowButtonMarkup    : '<b class="button">&#x25be;</b>',
     disableOnMobile      : false,
-    nativeOnMobile       : true,
+    nativeOnMobile       : false,
     openOnFocus          : true,
     openOnHover          : false,
     hoverIntentTimeout   : 500,

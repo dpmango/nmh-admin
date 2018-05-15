@@ -1,46 +1,47 @@
 // Right-Sidebar
 .right
 	.right__wrapper(js-sticky)
-		p.p-label Категория
-		.right__container
-			.ui-checkbox
-				label Дом
-					input(type="checkbox")
-					span
-			.ui-checkbox
-				label Таунхаус
-					input(type="checkbox")
-					span
-			.ui-checkbox
-				label Земельный участок
-					input(type="checkbox")
-					span
-		p.p-label Статус
-		.right__container
-			.ui-checkbox
-				label Продан
-					input(type="checkbox")
-					span
-			.ui-checkbox
-				label Резерв
-					input(type="checkbox")
-					span
-			.ui-checkbox
-				label Эксклюзив
-					input(type="checkbox")
-					span
-		p.p-label Теги
-		.right__container
-			ul.tags
-				li.tags__added Web Deisgn
-					span(js-remove-tag)
-					input(type="hidden", name="tags[]", value="Web Deisgn")
-				li.tags__added Web Develop
-					span(js-remove-tag)
-					input(type="hidden", name="tags[]", value="Web Develop")
-				li.tags__added SEO
-					span(js-remove-tag)
-					input(type="hidden", name="tags[]", value="SEO")
-				li.tag__input
-					.ui-group
-						input(type="text" js-search-field)
+		div(js-teleport data-teleport-to="mobile-select" data-teleport-condition="<1068")
+			p.p-label Категория
+			.right__container
+				.ui-checkbox
+					label Дом
+						input(type="checkbox")
+						span
+				.ui-checkbox
+					label Таунхаус
+						input(type="checkbox")
+						span
+				.ui-checkbox
+					label Земельный участок
+						input(type="checkbox")
+						span
+			p.p-label Статус
+			.right__container
+				.ui-checkbox
+					label Продан
+						input(type="checkbox")
+						span
+				.ui-checkbox
+					label Резерв
+						input(type="checkbox")
+						span
+				.ui-checkbox
+					label Эксклюзив
+						input(type="checkbox")
+						span
+			p.p-label Теги
+			.right__container
+				ul.tags
+					li.tags__added Web Deisgn
+						span(js-remove-tag)
+						input(type="hidden", name="tags[]", value="Web Deisgn")
+					li.tags__added Web Develop
+						span(js-remove-tag)
+						input(type="hidden", name="tags[]", value="Web Develop")
+					li.tags__added SEO
+						span(js-remove-tag)
+						input(type="hidden", name="tags[]", value="SEO")
+					li.tag__input
+						.ui-group
+							input(type="text" js-search-field)

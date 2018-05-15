@@ -107,6 +107,11 @@
 		justify-content: flex-start;
 		input
 			border: 1px solid $borderColor
+		.selectric
+			min-width: 160px
+			.label
+				padding: 12px 20px 11px
+
 	&__item
 		margin-right: 25px
 		&-date
@@ -123,3 +128,47 @@
 		font-size: 12px
 .input-price
 	min-width: 140px
+
+.selectric-absolute
+	position: absolute
+	left: 0
+	width: 100%
+	bottom: 0
+	z-index: 2
+	&.selectric-disabled
+		opacity: 1
+		z-index: 1
+		&:after
+			display: block
+			position: absolute
+			content: ''
+			width: 100%
+			height: 100%
+			left: 0
+			top: 0
+			background: #fff
+			opacity: 0.5
+
++r($desktop1068)
+	.sidebar
+		margin-right: 40px
+		&__back
+			margin: 30px 0
+	.right
+		display: none
+	.property
+		padding-bottom: 88px
+		&__info
+			width: 100% !important
+			flex-wrap: wrap
+			align-items: center
+			p
+				width: 100%
+				min-width: 300px
+				&:nth-child(1)
+					order: -1
+				&:nth-child(2)
+					order: 2
+		&__buttons
+			min-width: 245px
+			margin: -13px 0 -13px auto

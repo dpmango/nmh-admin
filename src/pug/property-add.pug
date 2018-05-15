@@ -114,29 +114,50 @@ block content
                   label Регион
                   select(js-selectric).bordered
                     option Москва
-                    option Санкт-Петербург
+                    option Московская область
                 .ui-group
                   label Округ
-                  select(js-selectric).bordered
-                    option Новомосковский
-                    option Центральный
+                  select(js-selectric js-select-okrug).bordered
+                    option(open-novomosc) Новомосковский
+                    option(open-troitsk) Троицкий
                 .ui-group
                   label Поселение
-                  select(js-selectric).bordered
-                    option Десеновское
-                    option Воскресенское
+                  select(js-selectric js-opened-novomosc).bordered.absolute
                     option Внуковское
+                    option Воскресенское
+                    option Десёновское
+                    option Кокошкино
+                    option Марушкинское
+                    option Московский
+                    option Мосрентген
+                    option Рязановское
+                    option Сосенское
+                    option Филимонковское
+                    option Щербинка
+                  select(js-selectric js-opened-troitsk disabled).bordered.absolute
+                    option Вороновское
+                    option Киевский
+                    option Михайлово-Ярцевское
+                    option Первомайское
+                    option Роговское
+                    option Щаповское
+                    option Троицк
+                    option Новофёдоровское
+                    option Краснопахорское
+                    option Кленовское
               .property__grid.items-3
                 .ui-group
                   label Населенный пункт
-                  select(js-selectric).bordered
-                    option Москва
-                    option Санкт-Петербург
+                  input(type="text" placeholder="Введите название")
                 .ui-group
                   label Шоссе
                   select(js-selectric).bordered
-                    option Новомосковский
-                    option Центральный
+                    option Калужское
+                    option Киевское
+                    option Минское
+                    option Дмитровское
+                    option Новорижское
+                    option Рублёво-Успенское
                 .ui-group
                   label км от МКАД
                   input(type="text" value="25")

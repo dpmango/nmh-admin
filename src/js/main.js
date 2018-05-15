@@ -32,6 +32,7 @@ $(document).ready(function() {
         initValidations();
         initMaps();
         initDatepicker();
+        initTeleport();
 
         // development helper
         _window.on('resize', debounce(setBreakpoint, 200))
@@ -69,40 +70,80 @@ $(document).ready(function() {
     }
 
 
+    ////////////
+    // TELEPORT PLUGIN
+    ////////////
+    function initTeleport(){
+      $('[js-teleport]').each(function (i, val) {
+        var self = $(val)
+        var objHtml = $(val).html();
+        var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+        var conditionMedia = $(val).data('teleport-condition').substring(1);
+        var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+        if (target && objHtml && conditionPosition) {
+
+          function teleport() {
+            var condition;
+
+            if (conditionPosition === "<") {
+              condition = _window.width() < conditionMedia;
+            } else if (conditionPosition === ">") {
+              condition = _window.width() > conditionMedia;
+            }
+
+            if (condition) {
+              target.html(objHtml)
+              self.html('')
+            } else {
+              self.html(objHtml)
+              target.html("")
+            }
+          }
+
+          teleport();
+          _window.on('resize', debounce(teleport, 100));
+
+
+        }
+      })
+    }
+
+
 
     //////////
     // COMMON
     //////////
 
+
     // MAGNIFIC POPUPS - PREVIEW IMAGE ON PROPERTY LIST PAGE
 
-    // Image popups
     $('[js-open-image]').magnificPopup({
-      type: 'image',
-      removalDelay: 500,
-      callbacks: {
-        beforeOpen: function() {
-           this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-           this.st.mainClass = this.st.el.attr('data-effect');
-        }
-      },
-      closeOnContentClick: true,
-      midClick: true
+        type: 'image',
+        removalDelay: 500,
+        callbacks: {
+            beforeOpen: function() {
+                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                this.st.mainClass = this.st.el.attr('data-effect');
+            }
+        },
+        closeOnContentClick: true,
+        midClick: true
     });
 
     // ON HOVER PROPERTY LIST CHANGE
 
     $('.property__change').hover(function(e) {
-        e.preventDefault();
-        $(this).parent().css('z-index', '5');
-        $(this).find('.property__change-links').fadeIn();
-    },
-    function() {
-        setTimeout(function() {
-            $('.property__list-item td').css('z-index', '0');
-        }, 250);
-        $('.property__change-links').fadeOut();
-    });
+            e.preventDefault();
+            $(this).parent().css('z-index', '5');
+            $(this).find('.property__change-links').fadeIn();
+        },
+        function() {
+            setTimeout(function() {
+                $('.property__list-item td').css('z-index', '0');
+            }, 250);
+            $('.property__change-links').fadeOut();
+        });
 
     // DATEPICKER
 
