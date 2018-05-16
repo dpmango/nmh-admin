@@ -154,8 +154,11 @@ $(document).ready(function() {
 
     // ADD PHOTOS - DROPZONE JS
 
+    Dropzone.autoDiscover = false;
+
     var dropzone = new Dropzone('.add-photos', {
         // previewTemplate: document.querySelector('#preview-template').innerHTML,
+        url: "http://localhost:8080/upload",
         parallelUploads: 2,
         thumbnailHeight: 120,
         thumbnailWidth: 120,

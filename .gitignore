@@ -8,6 +8,9 @@ bower_components
 # Ignore dist folder
 dist
 
+#Ignore uploads
+uploads
+
 # Package manager files
 package-lock.json
 
