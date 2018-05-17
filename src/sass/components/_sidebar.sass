@@ -59,11 +59,60 @@
 		margin-top: 90px
 		.ico
 			margin-right: 15px
+	&__logo
+		display: none
+		
+
+.menu-link
+	display: none
 
 +r($desktop1068)
+	.menu-link
+		display: block
+		position: fixed
+		top: 50%
+		transform: translateY(-50%)
+		left: -20px
+		text-align: center
+		word-wrap: break-word
+		background: #fff
+		padding: 10px
+		text-align: center
+		writing-mode: vertical-rl
+		border: 1px solid #eee
+		border-left: none
+		transition: all $transitionSpeed ease-in-out
+		&.is-active
+			left: 258px
 	.sidebar
-		margin-right: 40px
+		position: fixed
+		height: 100vh
+		
+		top: 0
+		padding-top: 62px
+		overflow-y: scroll
+		border-right: 1px solid #eee
+		transition: all $transitionSpeed ease-in-out
+		margin-right: 0
+		left: -282px
+		background: #fff
+		z-index: 10
+		min-width: 280px
+		padding-left: 20px
+		padding-right: 20px
+		&.is-open
+			left: 0
+		&__logo
+			position: absolute
+			display: block
+			left: 40px
+			top: 12px
+			.ico
+				font-size: 24px
 		&__back
 			margin: 30px 0
+		&__wrapper
+			&.is_stuck
+				position: static !important
 	.right
 		display: none

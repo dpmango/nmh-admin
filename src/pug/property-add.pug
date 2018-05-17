@@ -118,8 +118,8 @@ block content
                 .ui-group
                   label Округ
                   select(js-selectric js-select-okrug).bordered
-                    option(open-novomosc) Новомосковский
-                    option(open-troitsk) Троицкий
+                    option(val="open-novomosc") Новомосковский
+                    option(val="open-troitsk") Троицкий
                 .ui-group
                   label Поселение
                   select(js-selectric js-opened-novomosc).bordered.absolute
@@ -167,19 +167,22 @@ block content
                 .property__map
                   //- #property-map
             h3.property__heading Фотографии
-            .property__container
+            .property__container.property__container--photos
               .add-photos.dropzone.needsclick(action='/upload' method="POST" enctype="multipart/form-data")
                 .dz-message.needsclick
-                  | Drop files here or click to upload.
+                  | Перетащите файлы
                   br
-                  span.note.needsclick
-                    | (This is just a demo dropzone. Selected 
-                    | files are 
-                    strong not
-                    |  actually uploaded.)
+                  | или 
+                  span открыть
 
             h3.property__heading Планировки
-            .property__container
+            .property__container.property__container--photos
+              .add-photos.dropzone.needsclick(action='/upload' method="POST" enctype="multipart/form-data")
+                .dz-message.needsclick
+                  | Перетащите файлы
+                  br
+                  | или 
+                  span открыть
             h3.property__heading SEO
             .property__container
               .ui-group

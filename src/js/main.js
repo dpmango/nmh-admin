@@ -154,30 +154,36 @@ $(document).ready(function() {
 
     // ADD PHOTOS - DROPZONE JS
 
-    Dropzone.autoDiscover = false;
 
-    var dropzone = new Dropzone('.add-photos', {
-        // previewTemplate: document.querySelector('#preview-template').innerHTML,
-        url: "http://localhost:8080/upload",
-        parallelUploads: 2,
-        thumbnailHeight: 120,
-        thumbnailWidth: 120,
-        maxFilesize: 3,
-        filesizeBase: 1000,
-        thumbnail: function(file, dataUrl) {
-            if (file.previewElement) {
-                file.previewElement.classList.remove("dz-file-preview");
-                var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                for (var i = 0; i < images.length; i++) {
-                    var thumbnailElement = images[i];
-                    thumbnailElement.alt = file.name;
-                    thumbnailElement.src = dataUrl;
+    function initMaps() {
+        if ($(".add-photos").length > 0) {
+
+            Dropzone.autoDiscover = false;
+
+            var dropzone = new Dropzone('.add-photos', {
+                // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                url: "http://localhost:8080/upload",
+                parallelUploads: 2,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 3,
+                filesizeBase: 1000,
+                thumbnail: function(file, dataUrl) {
+                    if (file.previewElement) {
+                        file.previewElement.classList.remove("dz-file-preview");
+                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                        for (var i = 0; i < images.length; i++) {
+                            var thumbnailElement = images[i];
+                            thumbnailElement.alt = file.name;
+                            thumbnailElement.src = dataUrl;
+                        }
+                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
                 }
-                setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
-            }
-        }
 
-    });
+            });
+        };
+    };
 
     // TAGS ADD
 
@@ -230,9 +236,15 @@ $(document).ready(function() {
         .on('click', '[href="#"]', function(e) {
             e.preventDefault();
         })
+
         .on('click', '.c-seo a', function() {
             $(this).parents('.content__item').toggleClass('is-open');
             $(this).parents('.content__item').find('.c-edit').slideToggle();
+        })
+
+        .on('click', '[js-open-menu]', function() {
+            $(this).toggleClass('is-active');
+            $(this).parent().toggleClass('is-open');
         })
 
 

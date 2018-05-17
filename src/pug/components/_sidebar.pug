@@ -1,5 +1,8 @@
 // Sidebar
 .sidebar
+  a(href="homepage.html").sidebar__logo
+    +icon('ico-logo')
+  a.menu-link(href="#" js-open-menu) Меню
   .sidebar__wrapper(js-sticky)
     a.sidebar__index(href="#") Главная
     ul.sidebar__main

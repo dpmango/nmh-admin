@@ -1,0 +1,48 @@
+.dropzone
+	display: flex
+	min-height: 360px
+	max-width: 693px
+	flex-wrap: wrap
+	align-items: flex-start
+	.dz-message
+		margin: 0
+		font-size: 14px
+		opacity: 0.5
+		align-self: center
+		width: 100%
+		text-align: center
+		span
+			color: #359BE0
+			border-bottom: 1px solid #359BE0
+	.dz-preview
+		max-height: 80px
+		display: inline-flex
+		margin: 7px
+		min-height: 80px
+		.dz-image
+			width: 120px
+			height: auto
+			max-height: 80px
+			border-radius: 4px
+			img
+				position: absolute
+				width: 100%
+				left: 50%
+				top: 50%
+				transform: translate(-50%, -50%)
+		.dz-error-message
+			top: 100%
+		.dz-success-mark,
+		.dz-error-mark
+			width: 24px
+			height: 24px
+			display: none
+			
+			svg
+				width: 24px
+				height: 24px
+		.dz-error-mark
+			left: 50%
+			top: 50%
+			transform: translate(-50%,-50%)
+			margin: 0
