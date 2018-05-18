@@ -241,8 +241,8 @@ $(document).ready(function() {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
                 url: "http://localhost:8080/upload",
                 parallelUploads: 2,
-                thumbnailHeight: 120,
-                thumbnailWidth: 120,
+                thumbnailHeight: 65,
+                thumbnailWidth: 100,
                 maxFilesize: 3,
                 filesizeBase: 1000,
                 thumbnail: function(file, dataUrl) {

@@ -23,7 +23,7 @@
 		td
 			border-bottom: 1px solid #F6F6F6
 			position: relative
-			
+
 		.c-link
 			font-size: 14px
 			transition: .25s $ease
@@ -35,6 +35,8 @@
 		a.show-preview
 			position: relative
 			border-radius: 4px
+			// prevent flicker
+			z-index: 1
 			overflow: hidden
 			display: inline-block
 			font-size: 0
@@ -80,7 +82,7 @@
 		height: 7px
 		cursor: pointer
 		position: relative
-		
+
 		span
 			position: absolute
 			display: block
@@ -110,7 +112,7 @@
 				opacity: 1
 				height: auto
 
-				
+
 	&__change-links
 		position: absolute
 		right: 0
@@ -151,7 +153,7 @@
 			&:hover
 				background: $colorPrimary
 				color: #fff
-			
+
 
 .mfp-zoom-in
 	.mfp-with-anim

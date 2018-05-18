@@ -1,15 +1,13 @@
-ProjectTitle: NMH
+ProjectTitle: NMH-admin
 
 PageList:
 - file: property-list.html
-  ready: 70
+  ready: 90
 - file: property-add.html
-  ready: 70
+  ready: 90
 - file: categories.html
-  ready: 70
+  ready: 90
 - file: tags.html
-  ready: 70
+  ready: 90
 - file: login.html
-  ready: 70
-- file: styleguide.html
-  ready: 10
+  ready: 90
