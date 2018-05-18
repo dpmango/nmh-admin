@@ -9,7 +9,7 @@ PageList:
   ready: 70
 - file: tags.html
   ready: 70
-- file: Login.html
+- file: login.html
   ready: 70
 - file: styleguide.html
   ready: 10

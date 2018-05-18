@@ -33,17 +33,18 @@
 			display: list-item
 			&.is-active
 				font-weight: 700
-				&:after
-					display: block
-					content: ''
-					width: 3px
-					height: 100%
-					position: absolute
-					left: 0
-					top: 0
-					background: $colorPrimary
-					border-radius: 10px
-					box-shadow: 0 0 1px 0 rgba(0,0,0,0.35)
+				background: darken(#F6F6F6, 3%)
+				// &:after
+				// 	display: block
+				// 	content: ''
+				// 	width: 3px
+				// 	height: 100%
+				// 	position: absolute
+				// 	left: 0
+				// 	top: 0
+				// 	background: $colorPrimary
+				// 	border-radius: 10px
+				// 	box-shadow: 0 0 1px 0 rgba(0,0,0,0.35)
 		a
 			font-size: 14px
 			padding-left: 20px
@@ -63,16 +64,16 @@
 		display: none
 		
 
-.menu-link
+.show-menu-link
 	display: none
 
 +r($desktop1068)
-	.menu-link
+	.show-menu-link
 		display: block
 		position: fixed
 		top: 50%
 		transform: translateY(-50%)
-		left: -20px
+		left: -21px
 		text-align: center
 		word-wrap: break-word
 		background: #fff
@@ -82,15 +83,17 @@
 		border: 1px solid #eee
 		border-left: none
 		transition: all $transitionSpeed ease-in-out
+		// box-shadow: 3px 1px 5px rgba(154,154,154,0.2)
 		&.is-active
 			left: 258px
+			box-shadow: 3px 1px 5px rgba(154,154,154,0.2)
 	.sidebar
 		position: fixed
 		height: 100vh
 		
 		top: 0
 		padding-top: 62px
-		overflow-y: scroll
+		// overflow-y: scroll
 		border-right: 1px solid #eee
 		transition: all $transitionSpeed ease-in-out
 		margin-right: 0
@@ -102,6 +105,7 @@
 		padding-right: 20px
 		&.is-open
 			left: 0
+			box-shadow: 0 1px 10px rgba(154,154,154,0.4)
 		&__logo
 			position: absolute
 			display: block

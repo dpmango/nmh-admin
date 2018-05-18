@@ -15,6 +15,9 @@
 			text-align: left
 			span
 				font-weight: 600
+				&.rub-point
+					font-weight: 400
+					margin-left: 4px
 		th
 			opacity: 0.5
 		td
@@ -23,6 +26,12 @@
 			
 		.c-link
 			font-size: 14px
+			transition: .25s $ease
+			.ico
+				transition: .25s $ease
+			&:hover
+				.ico
+					transform: rotate(180deg)
 		a.show-preview
 			position: relative
 			border-radius: 4px
@@ -94,15 +103,26 @@
 		&:hover
 			span
 				border-color: rgba(0,0,0,1)
+		&.is-active
+			z-index: 2
+			.property__change-links
+				display: block
+				opacity: 1
+				height: auto
+
+				
 	&__change-links
 		position: absolute
-		left: -1px
+		right: -80px
 		top: 10px
 		box-shadow: 0px 5px 10px 1px #F5f5f5
 		min-width: 190px
 		border-radius: 5px
-		// overflow: hidden
-		display: none
+
+		overflow: hidden
+		opacity: 0
+		height: 0
+		transition: .25s $ease
 		&:before
 			position: absolute
 			display: block

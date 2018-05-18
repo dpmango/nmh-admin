@@ -1,22 +1,22 @@
 // Sidebar
-.sidebar
+.sidebar#sidebar
   a(href="homepage.html").sidebar__logo
     +icon('ico-logo')
-  a.menu-link(href="#" js-open-menu) Меню
+  a.show-menu-link(href="#" js-open-menu) Меню
   .sidebar__wrapper(js-sticky)
-    a.sidebar__index(href="#") Главная
+    a.sidebar__index(href="/login.html") Главная
     ul.sidebar__main
       li
-        a(href="#") Недвижимость
+        a(href="/property-list.html") Недвижимость
         ul.sidebar__secondary
           li
-            a(href="#") Все записи
+            a(href="/property-list.html") Все записи
           li
             a(href="#") Черновики
           li
-            a(href="#") Категории
+            a(href="/categories.html") Категории
           li.is-active
-            a(href="#") Теги
+            a(href="/tags.html") Теги
       li
         a(href="#") Блог
     a.sidebar__back(href="#")

@@ -52,10 +52,10 @@ body, html
   padding-left: 40px
   padding-right: 40px
 
-+r($mobile)
-  .container
-    padding-left: 15px
-    padding-right: 15px
+// +r($mobile)
+//   .container
+//     padding-left: 15px
+//     padding-right: 15px
 
 // REMOVE FOR PRODUCTION !
 .dev-bp-debug
@@ -79,3 +79,10 @@ body, html
   bottom: 0
   left: 0
   width: 100%
+
+
+@media screen and (max-width: 768px)
+  body, html
+    min-width: 768px
+    overflow-x: scroll
+    

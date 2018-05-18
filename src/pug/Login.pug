@@ -11,10 +11,10 @@ block content
       .login__heading
         .login__logotype
           +icon('ico-logo')
-        h2.login__title.wow.wowFadeUp Позвольте найти ваш дом
-      form.login__form.wow.wowFadeUp(data-animation-delay='.1s' action="#" method="#")
+        h2.login__title Позвольте найти ваш дом
+      form.login__form(action="#" method="#")
         .ui-group
-          input(type="text" placeholder="email")
+          input(type="text" placeholder="email" js-mask-email)
         .ui-group
           input(type="password" placeholder="пароль")
         .login__cta

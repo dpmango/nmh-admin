@@ -59,8 +59,8 @@
 .selectric-open
   z-index: 9999
   .selectric
-    border-bottom-left-radius: 0px
-    border-bottom-right-radius: 0px
+    // border-bottom-left-radius: 0px
+    // border-bottom-right-radius: 0px
     // border-color: $colorPrimary
     .button
       transform: translateY(-50%)
@@ -124,12 +124,15 @@
 .selectric-items
   display: none
   position: absolute
-  top: 100%
+  top: calc(100% + 7px)
   left: 0
   background: white
   border: 0
-  border-bottom-left-radius: 4px
-  border-bottom-right-radius: 4px
+  // border-bottom-left-radius: 4px
+  // border-bottom-right-radius: 4px
+  // border-top-left-radius: 4px
+  // border-top-right-radius: 4px
+  border-radius: 4px
   overflow: hidden
   z-index: -1
   box-shadow: 0 0 10px -6px
@@ -157,12 +160,15 @@
     cursor: pointer
     transition: .25s $ease
     &.selected
-      background: #FAFAFC
+      background: $colorPrimary
+      color: #fff
 
     &.highlighted
-      background: #FAFAFC
+      background: $colorPrimary
+      color: #fff
     &:hover
       background: #FAFAFC
+      color: #000
   .disabled
     filter: alpha(opacity = 50)
     opacity: 0.5

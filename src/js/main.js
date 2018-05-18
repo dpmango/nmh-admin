@@ -73,40 +73,40 @@ $(document).ready(function() {
     ////////////
     // TELEPORT PLUGIN
     ////////////
-    function initTeleport(){
-      $('[js-teleport]').each(function (i, val) {
-        var self = $(val)
-        var objHtml = $(val).html();
-        var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-        var conditionMedia = $(val).data('teleport-condition').substring(1);
-        var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+    function initTeleport() {
+        $('[js-teleport]').each(function(i, val) {
+            var self = $(val)
+            var objHtml = $(val).html();
+            var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+            var conditionMedia = $(val).data('teleport-condition').substring(1);
+            var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
 
-        if (target && objHtml && conditionPosition) {
+            if (target && objHtml && conditionPosition) {
 
-          function teleport() {
-            var condition;
+                function teleport() {
+                    var condition;
 
-            if (conditionPosition === "<") {
-              condition = _window.width() < conditionMedia;
-            } else if (conditionPosition === ">") {
-              condition = _window.width() > conditionMedia;
+                    if (conditionPosition === "<") {
+                        condition = _window.width() < conditionMedia;
+                    } else if (conditionPosition === ">") {
+                        condition = _window.width() > conditionMedia;
+                    }
+
+                    if (condition) {
+                        target.html(objHtml)
+                        self.html('')
+                    } else {
+                        self.html(objHtml)
+                        target.html("")
+                    }
+                }
+
+                teleport();
+                _window.on('resize', debounce(teleport, 100));
+
+
             }
-
-            if (condition) {
-              target.html(objHtml)
-              self.html('')
-            } else {
-              self.html(objHtml)
-              target.html("")
-            }
-          }
-
-          teleport();
-          _window.on('resize', debounce(teleport, 100));
-
-
-        }
-      })
+        })
     }
 
 
@@ -114,6 +114,20 @@ $(document).ready(function() {
     //////////
     // COMMON
     //////////
+
+    // REMOVE CLASS IS-OPEN FROM sidebar
+    // REMOVE CLASS IS-ACTIVE FROM show-menu-link
+
+    jQuery(function($){
+        $(document).mouseup(function (e){
+            var div = $("#sidebar");
+            if (!div.is(e.target)
+                && div.has(e.target).length === 0) {
+                $('.sidebar').removeClass('is-open');
+                $('.show-menu-link').removeClass('is-active');
+            }
+        });
+    });
 
 
     // MAGNIFIC POPUPS - PREVIEW IMAGE ON PROPERTY LIST PAGE
@@ -133,22 +147,35 @@ $(document).ready(function() {
 
     // ON HOVER PROPERTY LIST CHANGE
 
-    $('.property__change').hover(function(e) {
-            e.preventDefault();
-            $(this).parent().css('z-index', '5');
-            $(this).find('.property__change-links').fadeIn();
-        },
-        function() {
-            setTimeout(function() {
-                $('.property__list-item td').css('z-index', '0');
-            }, 250);
-            $('.property__change-links').fadeOut();
-        });
+    _document.on('click', '.property__change', function(e) {
+        e.preventDefault();
+        $('.property__change').removeClass('is-active');
+        $(this).addClass('is-active');
+    });
+
+    _document.on('click', '.property__change.is-active', function(e) {
+        e.preventDefault();
+        $('.property__change').removeClass('is-active');
+    });
+
+    // $('.property__change').hover(function(e) {
+    //         e.preventDefault();
+    //         $(this).parent().css('z-index', '5');
+    //         $(this).find('.property__change-links').fadeIn();
+    //     },
+    //     function() {
+    //         setTimeout(function() {
+    //             $('.property__list-item td').css('z-index', '0');
+    //         }, 250);
+    //         $('.property__change-links').fadeOut();
+    //     });
 
     // DATEPICKER
 
     function initDatepicker() {
-        $('.datepicker').datepicker();
+        $('.datepicker').datepicker({
+            dateFormat: 'M d, yyyy'
+        });
         $('.datepicker').data('datepicker');
     };
 
@@ -245,6 +272,13 @@ $(document).ready(function() {
         .on('click', '[js-open-menu]', function() {
             $(this).toggleClass('is-active');
             $(this).parent().toggleClass('is-open');
+        })
+
+
+
+        .on('click', '.sidebar li a', function() {
+            $('.sidebar li').removeClass('is-active');
+            $(this).parent().addClass('is-active');
         })
 
 
@@ -561,27 +595,19 @@ $(document).ready(function() {
 
         var validateErrorPlacement = function(error, element) {
             error.addClass('ui-input__validation');
-            error.appendTo(element.parent());
+            error.appendTo(element.parent("div"));
         }
         var validateHighlight = function(element) {
-            $(element).addClass("has-error");
+            $(element).parent('div').addClass("has-error");
+            $(element).parent().parent().addClass("has-error");
         }
         var validateUnhighlight = function(element) {
-            $(element).removeClass("has-error");
+            $(element).parent('div').removeClass("has-error");
+            $(element).parent().parent().removeClass("has-error");
         }
-
-        var validatePhone = {
-            required: true,
-            normalizer: function(value) {
-                var PHONE_MASK = '+X (XXX) XXX-XXXX';
-                if (!value || value === PHONE_MASK) {
-                    return value;
-                } else {
-                    return value.replace(/[^\d]/g, '');
-                }
-            },
-            minlength: 11,
-            digits: true
+        var validateSubmitHandler = function(form) {
+            $(form).addClass('loading');
+            // window.location.href = '/log-page.html'
         }
 
         ////////
@@ -591,46 +617,24 @@ $(document).ready(function() {
         /////////////////////
         // REGISTRATION FORM
         ////////////////////
-        $("[js-validate-cb]").validate({
+        $(".login__form").validate({
             errorPlacement: validateErrorPlacement,
             highlight: validateHighlight,
             unhighlight: validateUnhighlight,
-            submitHandler: function(form) {
-                $(form).addClass('loading');
-                $.ajax({
-                    type: "POST",
-                    url: $(form).attr('action'),
-                    data: $(form).serialize(),
-                    success: function(response) {
-                        $(form).removeClass('loading');
-                        var data = $.parseJSON(response);
-                        if (data.status == 'success') {
-                            // do something I can't test
-                        } else {
-                            $(form).find('[data-error]').html(data.message).show();
-                        }
-                    }
-                });
-
-                $(form).hide();
-                $(form).parent().find('.cb__form-thanks').fadeIn();
-
-            },
+            submitHandler: validateSubmitHandler,
             rules: {
                 name: "required",
-                email: {
+                password: {
                     required: true,
-                    email: true
-                },
-                message: "required"
+                    minlength: 6,
+                }
             },
             messages: {
                 name: "Заполните это поле",
-                email: {
+                password: {
                     required: "Заполните это поле",
-                    email: "Email содержит неправильный формат"
+                    minlength: "Пароль мимимум 6 символов"
                 },
-                message: "Заполните это поле",
             }
         });
 
