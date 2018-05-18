@@ -118,11 +118,11 @@ $(document).ready(function() {
     // REMOVE CLASS IS-OPEN FROM sidebar
     // REMOVE CLASS IS-ACTIVE FROM show-menu-link
 
-    jQuery(function($){
-        $(document).mouseup(function (e){
+    jQuery(function($) {
+        $(document).mouseup(function(e) {
             var div = $("#sidebar");
-            if (!div.is(e.target)
-                && div.has(e.target).length === 0) {
+            if (!div.is(e.target) &&
+                div.has(e.target).length === 0) {
                 $('.sidebar').removeClass('is-open');
                 $('.show-menu-link').removeClass('is-active');
             }
@@ -158,17 +158,16 @@ $(document).ready(function() {
         $('.property__change').removeClass('is-active');
     });
 
-    // $('.property__change').hover(function(e) {
-    //         e.preventDefault();
-    //         $(this).parent().css('z-index', '5');
-    //         $(this).find('.property__change-links').fadeIn();
-    //     },
-    //     function() {
-    //         setTimeout(function() {
-    //             $('.property__list-item td').css('z-index', '0');
-    //         }, 250);
-    //         $('.property__change-links').fadeOut();
-    //     });
+    // $('.okrug').change(function() {
+    //     if ($('.open-novomosc').is('selected')) {
+    //         // $('.selectric-novomosc').removeClass('selectric-disabled');
+    //         // $('select').selectric('refresh');
+    //         $('.selectric-novomosc').remove();
+    //     } 
+    //     else {
+    //         // $('.selectric-troitsk').remove();
+    //     }
+    // });
 
     // DATEPICKER
 
