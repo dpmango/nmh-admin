@@ -27,15 +27,15 @@ $(document).ready(function() {
         initSticky();
         initSelectric();
         initMasks();
+        initPopups();
         initPerfectScrollbar();
         initAutocompleate();
         initValidations();
         initMaps();
         initDatepicker();
         initTeleport();
+        initDropzone();
 
-        // development helper
-        _window.on('resize', debounce(setBreakpoint, 200))
     }
 
     // this is a master function which should have all functionality
@@ -70,180 +70,9 @@ $(document).ready(function() {
     }
 
 
-    ////////////
-    // TELEPORT PLUGIN
-    ////////////
-    function initTeleport() {
-        $('[js-teleport]').each(function(i, val) {
-            var self = $(val)
-            var objHtml = $(val).html();
-            var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-            var conditionMedia = $(val).data('teleport-condition').substring(1);
-            var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
-
-            if (target && objHtml && conditionPosition) {
-
-                function teleport() {
-                    var condition;
-
-                    if (conditionPosition === "<") {
-                        condition = _window.width() < conditionMedia;
-                    } else if (conditionPosition === ">") {
-                        condition = _window.width() > conditionMedia;
-                    }
-
-                    if (condition) {
-                        target.html(objHtml)
-                        self.html('')
-                    } else {
-                        self.html(objHtml)
-                        target.html("")
-                    }
-                }
-
-                teleport();
-                _window.on('resize', debounce(teleport, 100));
-
-
-            }
-        })
-    }
-
-
-
     //////////
     // COMMON
     //////////
-
-    // REMOVE CLASS IS-OPEN FROM sidebar
-    // REMOVE CLASS IS-ACTIVE FROM show-menu-link
-
-    jQuery(function($) {
-        $(document).mouseup(function(e) {
-            var div = $("#sidebar");
-            if (!div.is(e.target) &&
-                div.has(e.target).length === 0) {
-                $('.sidebar').removeClass('is-open');
-                $('.show-menu-link').removeClass('is-active');
-            }
-        });
-    });
-
-
-    // MAGNIFIC POPUPS - PREVIEW IMAGE ON PROPERTY LIST PAGE
-
-    $('[js-open-image]').magnificPopup({
-        type: 'image',
-        removalDelay: 500,
-        callbacks: {
-            beforeOpen: function() {
-                this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-                this.st.mainClass = this.st.el.attr('data-effect');
-            }
-        },
-        closeOnContentClick: true,
-        midClick: true
-    });
-
-    // ON HOVER PROPERTY LIST CHANGE
-
-    _document.on('click', '.property__change', function(e) {
-        e.preventDefault();
-        $('.property__change').removeClass('is-active');
-        $(this).addClass('is-active');
-    });
-
-    _document.on('click', '.property__change.is-active', function(e) {
-        e.preventDefault();
-        $('.property__change').removeClass('is-active');
-    });
-
-    // $('.okrug').change(function() {
-    //     if ($('.open-novomosc').is('selected')) {
-    //         // $('.selectric-novomosc').removeClass('selectric-disabled');
-    //         // $('select').selectric('refresh');
-    //         $('.selectric-novomosc').remove();
-    //     } 
-    //     else {
-    //         // $('.selectric-troitsk').remove();
-    //     }
-    // });
-
-    // DATEPICKER
-
-    function initDatepicker() {
-        $('.datepicker').datepicker({
-            dateFormat: 'M d, yyyy'
-        });
-        $('.datepicker').data('datepicker');
-    };
-
-    // ADD PHOTOS - DROPZONE JS
-
-
-    function initMaps() {
-        if ($(".add-photos").length > 0) {
-
-            Dropzone.autoDiscover = false;
-
-            var dropzone = new Dropzone('.add-photos', {
-                // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                url: "http://localhost:8080/upload",
-                parallelUploads: 2,
-                thumbnailHeight: 120,
-                thumbnailWidth: 120,
-                maxFilesize: 3,
-                filesizeBase: 1000,
-                thumbnail: function(file, dataUrl) {
-                    if (file.previewElement) {
-                        file.previewElement.classList.remove("dz-file-preview");
-                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                        for (var i = 0; i < images.length; i++) {
-                            var thumbnailElement = images[i];
-                            thumbnailElement.alt = file.name;
-                            thumbnailElement.src = dataUrl;
-                        }
-                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
-                    }
-                }
-
-            });
-        };
-    };
-
-    // TAGS ADD
-
-    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
-        return function(elem) {
-            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-        };
-    });
-    _document.ready(function() {
-        _document.on('click', '[js-remove-tag]', function(event) {
-            event.preventDefault();
-            $(this).parent().remove();
-        });
-        _document.on('click', 'ul.tags', function() {
-            $('[js-search-field]').focus();
-        });
-        _document.on('keypress', '[js-search-field]', function(event) {
-            if (event.which == '13') {
-                if (($(this).val() != '') && ($(".tags .tags__added:contains('" + $(this).val() + "') ").length == 0)) {
-
-                    $('<li class="tags__added">' + $(this).val() + '<span js-remove-tag></span><input type="hidden" value="' + $(this).val() + '" name="tags[]"></li>').insertBefore('.tag__input');
-                    $(this).val('');
-
-                } else {
-                    $(this).val('');
-
-                }
-            }
-        });
-
-    });
-
-    // TAGS ADD END
-
     function legacySupport() {
         // svg support for laggy browsers
         svg4everybody();
@@ -257,29 +86,42 @@ $(document).ready(function() {
     }
 
 
-    // Prevent # behavior
+    // CLICK HANDLERS
     _document
         .on('click', '[href="#"]', function(e) {
             e.preventDefault();
         })
 
-        .on('click', '.c-seo a', function() {
-            $(this).parents('.content__item').toggleClass('is-open');
-            $(this).parents('.content__item').find('.c-edit').slideToggle();
-        })
-
-        .on('click', '[js-open-menu]', function() {
-            $(this).toggleClass('is-active');
-            $(this).parent().toggleClass('is-open');
-        })
-
-
-
+        // sidebar
         .on('click', '.sidebar li a', function() {
             $('.sidebar li').removeClass('is-active');
             $(this).parent().addClass('is-active');
         })
+        .on('mouseup', function(e) {
+            var div = $("#sidebar");
+            if (!div.is(e.target) &&
+                div.has(e.target).length === 0) {
+                $('.sidebar').removeClass('is-open');
+                $('.show-menu-link').removeClass('is-active');
+            }
+        })
 
+        // PROPERTY LIST CHANGE
+        .on('click', '.property__change', function(e) {
+            e.preventDefault();
+            $('.property__change').removeClass('is-active');
+            $(this).addClass('is-active');
+        })
+        .on('click', '.property__change.is-active', function(e) {
+            e.preventDefault();
+            $('.property__change').removeClass('is-active');
+        })
+
+        // C SEO
+        .on('click', '.c-seo a', function() {
+            $(this).parents('.content__item').toggleClass('is-open');
+            $(this).parents('.content__item').find('.c-edit').slideToggle();
+        })
 
     //////////
     // TABS
@@ -350,11 +192,6 @@ $(document).ready(function() {
         }
     }
 
-
-    ////////////
-    // UI
-    ////////////
-
     // sticky kit
     function initSticky() {
         var sticky = $('[js-sticky]');
@@ -368,6 +205,94 @@ $(document).ready(function() {
             })
         }
     }
+
+    // MAGNIFIC POPUP
+    function initPopups(){
+        $('[js-open-image]').magnificPopup({
+            type: 'image',
+            removalDelay: 500,
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                    this.st.mainClass = this.st.el.attr('data-effect');
+                }
+            },
+            closeOnContentClick: true,
+            midClick: true
+        });
+    }
+
+
+    // DATEPICKER
+    function initDatepicker() {
+        $('.datepicker').datepicker({
+            dateFormat: 'M d, yyyy'
+        });
+        $('.datepicker').data('datepicker');
+    };
+
+    // ADD PHOTOS - DROPZONE JS
+    function initDropzone() {
+        if ($(".add-photos").length > 0) {
+
+            Dropzone.autoDiscover = false;
+
+            var dropzone = new Dropzone('.add-photos', {
+                // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                url: "http://localhost:8080/upload",
+                parallelUploads: 2,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 3,
+                filesizeBase: 1000,
+                thumbnail: function(file, dataUrl) {
+                    if (file.previewElement) {
+                        file.previewElement.classList.remove("dz-file-preview");
+                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                        for (var i = 0; i < images.length; i++) {
+                            var thumbnailElement = images[i];
+                            thumbnailElement.alt = file.name;
+                            thumbnailElement.src = dataUrl;
+                        }
+                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
+                }
+
+            });
+        };
+    };
+
+    // TAGS ADD
+    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+        return function(elem) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+    _document.on('click', '[js-remove-tag]', function(event) {
+        event.preventDefault();
+        $(this).parent().remove();
+    });
+    _document.on('click', 'ul.tags', function() {
+        $('[js-search-field]').focus();
+    });
+    _document.on('keypress', '[js-search-field]', function(event) {
+        if (event.which == '13') {
+            if (($(this).val() != '') && ($(".tags .tags__added:contains('" + $(this).val() + "') ").length == 0)) {
+
+                $('<li class="tags__added">' + $(this).val() + '<span js-remove-tag></span><input type="hidden" value="' + $(this).val() + '" name="tags[]"></li>').insertBefore('.tag__input');
+                $(this).val('');
+
+            } else {
+                $(this).val('');
+
+            }
+        }
+    });
+
+
+    ////////////
+    // UI
+    ////////////
 
     // selectric
 
@@ -540,49 +465,137 @@ $(document).ready(function() {
         $(window).resize();
     }
 
-    //////////
-    // DEVELOPMENT HELPER
-    //////////
-    function setBreakpoint() {
-        var wHost = window.location.host.toLowerCase()
-        var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
-        if (displayCondition) {
-            var wWidth = _window.width();
-
-            var content = "<div class='dev-bp-debug'>" + wWidth + "</div>";
-
-            $('.page').append(content);
-            setTimeout(function() {
-                $('.dev-bp-debug').fadeOut();
-            }, 1000);
-            setTimeout(function() {
-                $('.dev-bp-debug').remove();
-            }, 1500)
-        }
-    }
 
     function initMaps() {
         if ($("#property-map").length > 0) {
             ymaps.ready(init);
         }
-        var myMap,
-            myPlacemark;
+        var myMap, dynamicPlacemark, hasPlacemark = false;
 
         function init() {
             myMap = new ymaps.Map("property-map", {
-                center: [55.76, 37.64],
-                zoom: 12
+                center: [55.753215, 37.622504],
+                zoom: 10
             });
 
-            myPlacemark = new ymaps.Placemark([55.76, 37.64], {
-                hintContent: 'Москва!',
-                balloonContent: 'Столица России'
-            });
+            myMap.controls.remove('trafficControl');
+            myMap.controls.remove('searchControl');
+            myMap.controls.remove('fullscreenControl');
+            myMap.controls.remove('rulerControl');
+            // myMap.controls.remove('geolocationControl');
+            myMap.controls.remove('routeEditor');
+            myMap.controls.remove('typeSelector');
+            // myMap.controls.remove('zoomControl');
 
-            myMap.geoObjects.add(myPlacemark);
+            // click
+            myMap.events.add('click', function (e) {
+                var coords = e.get('coords');
+
+                ymaps.geocode(coords).then(function (res) {
+                    // get name
+                    var newObj = res.geoObjects.get(0);
+                    var newObjName = newObj.properties.get('name');
+
+                    $('[js-set-placemark]').val(newObjName);
+                    $('[js-set-placemark]').keydown();
+                });
+            });
         }
 
+        // input lister
+        _document.
+            on('keydown', '[js-set-placemark]', debounce(function(e){
+
+                var currentVal = $(this).val();
+
+                // gecoder
+                ymaps.geocode(currentVal, { results: 1 }).then(function (res) {
+                    var geoObj = res.geoObjects.get(0),
+                        geoObjCoords = geoObj.geometry.getCoordinates();
+
+                    if ( geoObjCoords ){
+                        // attach or update position
+                        if ( !hasPlacemark ){
+                            // add placemark
+                            dynamicPlacemark = new ymaps.Placemark(geoObjCoords, {
+                                balloonContent: currentVal
+                            }, {
+                                draggable: true
+                            });
+                            myMap.geoObjects.add(dynamicPlacemark);
+                            hasPlacemark = true;
+                            attachReverseGeocode(); // because bindings for placemark is ready only at this point
+                        } else{
+                            dynamicPlacemark.geometry.setCoordinates(geoObjCoords);
+                        }
+                        // set center
+                        myMap.setCenter(geoObjCoords, 14);
+                    }
+
+                }, function (err) {
+                    console.log(err.message);
+                });
+            }, 500));
+
+
+        function attachReverseGeocode() {
+            // reverse geocoding
+            dynamicPlacemark.events.add("dragend", function (e) {
+                var newPos = dynamicPlacemark.geometry.getCoordinates();
+
+                ymaps.geocode(newPos).then(function (res) {
+                    // set name in input
+                    var newObj = res.geoObjects.get(0);
+                    var newObjName = newObj.properties.get('name');
+
+                    $('[js-set-placemark]').val(newObjName);
+                    // myMap.setCenter(newPos, 14);
+                });
+            }, dynamicPlacemark);
+
+        }
     }
+
+    ////////////
+    // TELEPORT PLUGIN
+    ////////////
+    function initTeleport() {
+        $('[js-teleport]').each(function(i, val) {
+            var self = $(val)
+            var objHtml = $(val).html();
+            var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+            var conditionMedia = $(val).data('teleport-condition').substring(1);
+            var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+            if (target && objHtml && conditionPosition) {
+
+                function teleport() {
+                    var condition;
+
+                    if (conditionPosition === "<") {
+                        condition = _window.width() < conditionMedia;
+                    } else if (conditionPosition === ">") {
+                        condition = _window.width() > conditionMedia;
+                    }
+
+                    if (condition) {
+                        target.html(objHtml)
+                        self.html('')
+                    } else {
+                        self.html(objHtml)
+                        target.html("")
+                    }
+                }
+
+                teleport();
+                _window.on('resize', debounce(teleport, 100));
+
+
+            }
+        })
+    }
+
+
 
     ////////////////
     // FORM VALIDATIONS

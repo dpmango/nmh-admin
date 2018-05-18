@@ -162,10 +162,10 @@ block content
                   label км от МКАД
                   input.h-select(type="text" value="25")
               .ui-group
-                input(type="text" placeholder="Поиск адреса на карте")
+                input(type="text" placeholder="Поиск адреса на карте" js-set-placemark)
               .ui-group
                 .property__map
-                  //- #property-map
+                  #property-map
             h3.property__heading Фотографии
             .property__container.property__container--photos
               .add-photos.dropzone.needsclick(action='/upload' method="POST" enctype="multipart/form-data")
