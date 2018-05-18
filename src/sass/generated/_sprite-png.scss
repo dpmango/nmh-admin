@@ -1,11 +1,29 @@
 $sprite: (
-	footer-menu-arrow: (
-		offset-x: 0px,
+	dz-remove: (
+		offset-x: -23px,
 		offset-y: 0px,
 		width: 8px,
+		height: 8px,
+		total-width: 31px,
+		total-height: 40px,
+		image: '../img/sprite.png'
+	),
+	dz-zoom: (
+		offset-x: 0px,
+		offset-y: 0px,
+		width: 13px,
+		height: 14px,
+		total-width: 31px,
+		total-height: 40px,
+		image: '../img/sprite.png'
+	),
+	footer-menu-arrow: (
+		offset-x: 0px,
+		offset-y: -24px,
+		width: 8px,
 		height: 16px,
-		total-width: 8px,
-		total-height: 16px,
+		total-width: 31px,
+		total-height: 40px,
 		image: '../img/sprite.png'
 	),
 );
@@ -64,6 +82,12 @@ $sprite: (
 
 
 
+	.icon-dz-remove {
+		@include sprite(dz-remove)
+	}
+	.icon-dz-zoom {
+		@include sprite(dz-zoom)
+	}
 	.icon-footer-menu-arrow {
 		@include sprite(footer-menu-arrow)
 	}

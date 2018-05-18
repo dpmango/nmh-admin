@@ -211,6 +211,7 @@ $(document).ready(function() {
         $('[js-open-image]').magnificPopup({
             type: 'image',
             removalDelay: 500,
+            overflowY: 'auto',
             callbacks: {
                 beforeOpen: function() {
                     this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
@@ -220,6 +221,33 @@ $(document).ready(function() {
             closeOnContentClick: true,
             midClick: true
         });
+
+
+        // dropzone preview
+        _document.on('click', '.dz-image img', function(){
+          var targetEl = $(this);
+          console.log(targetEl)
+          $.magnificPopup.open({
+              items: {
+                  src: targetEl.attr('href')
+              },
+              type: 'image',
+              // delegate: 'img',
+              tLoading: 'Загрузка #%curr%...',
+              removalDelay: 500,
+              overflowY: 'auto',
+              callbacks: {
+                  beforeOpen: function() {
+                      this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+                      this.st.mainClass = "mfp-zoom-in";
+                  }
+              },
+              closeOnContentClick: true,
+              midClick: true
+          });
+        })
+
+
     }
 
 
@@ -233,11 +261,11 @@ $(document).ready(function() {
 
     // ADD PHOTOS - DROPZONE JS
     function initDropzone() {
-        if ($(".add-photos").length > 0) {
+        if ($("[js-add-photos]").length > 0) {
 
             Dropzone.autoDiscover = false;
 
-            var dropzone = new Dropzone('.add-photos', {
+            var dropzone = new Dropzone('[js-add-photos]', {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
                 url: "http://localhost:8080/upload",
                 parallelUploads: 2,
@@ -245,6 +273,10 @@ $(document).ready(function() {
                 thumbnailWidth: 100,
                 maxFilesize: 3,
                 filesizeBase: 1000,
+                addRemoveLinks: true,
+                success: function(file){
+                  console.log('sucess', file)
+                },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
                         file.previewElement.classList.remove("dz-file-preview");
@@ -253,11 +285,40 @@ $(document).ready(function() {
                             var thumbnailElement = images[i];
                             thumbnailElement.alt = file.name;
                             thumbnailElement.src = dataUrl;
+                            $(thumbnailElement).attr('href', dataUrl);
                         }
                         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
                     }
                 }
+            });
 
+            // plans
+            var dropzone2 = new Dropzone('[js-add-plans]', {
+                // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                url: "http://localhost:8080/upload",
+                parallelUploads: 2,
+                thumbnailHeight: 65,
+                thumbnailWidth: 100,
+                maxFilesize: 3,
+                filesizeBase: 1000,
+                addRemoveLinks: true,
+                success: function(file){
+                  console.log('sucess', file)
+                },
+                thumbnail: function(file, dataUrl) {
+                    if (file.previewElement) {
+                        file.previewElement.classList.remove("dz-file-preview");
+                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                        for (var i = 0; i < images.length; i++) {
+                            var thumbnailElement = images[i];
+                            thumbnailElement.alt = file.name;
+                            thumbnailElement.src = dataUrl;
+                            $(thumbnailElement).attr('href', dataUrl);
+                        }
+                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    }
+                },
+                previewTemplate: $('[js-preview-template-plans]').html()
             });
         };
     };
