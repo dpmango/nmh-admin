@@ -104,6 +104,11 @@ $(document).ready(function() {
             }
         })
 
+        .on('click', '[js-open-menu]', function() {
+            $(this).toggleClass('is-active');
+            $(this).parent().toggleClass('is-open');
+        })
+
         // PROPERTY LIST CHANGE
         .on('click', '.property__change', function(e) {
             e.preventDefault();
