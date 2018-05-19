@@ -28,14 +28,12 @@ $(document).ready(function() {
         initSelectric();
         initMasks();
         initPopups();
-        initPerfectScrollbar();
         initAutocompleate();
         initValidations();
         initMaps();
         initDatepicker();
         initTeleport();
         initDropzone();
-
     }
 
     // this is a master function which should have all functionality
@@ -123,44 +121,6 @@ $(document).ready(function() {
             $(this).parents('.content__item').find('.c-edit').slideToggle();
         })
 
-    //////////
-    // TABS
-    //////////
-    _document.on('click', '[js-tab]', function(e) {
-        var targetName = $(this).data('target');
-        var targetEl = $("[data-tab=" + targetName + "]");
-
-        if (targetName && targetEl) {
-            $(this).siblings().removeClass('is-active');
-            $(this).addClass('is-active');
-
-            targetEl.siblings().slideUp();
-            targetEl.slideDown();
-
-            triggerBody(false);
-        }
-    })
-
-    ////////////
-    // SCROLLBAR
-    ////////////
-    function initPerfectScrollbar() {
-        if ($('[js-scrollbar]').length > 0) {
-            $('[js-scrollbar]').each(function(i, scrollbar) {
-                if ($(scrollbar).not('.ps')) { // if it initialized
-
-                    var xAvail = $(scrollbar).data('x-disable') || false; // false is default
-                    var yAvail = $(scrollbar).data('y-disable') || false; // false is default
-                    var ps = new PerfectScrollbar(scrollbar, {
-                        suppressScrollX: xAvail,
-                        suppressScrollY: yAvail,
-                        wheelPropagation: true,
-                        minScrollbarLength: 20
-                    });
-                }
-            })
-        }
-    }
 
     ////////////
     // AUTOCOMPLEATE
@@ -226,7 +186,6 @@ $(document).ready(function() {
         // dropzone preview
         _document.on('click', '.dz-image img', function(){
           var targetEl = $(this);
-          console.log(targetEl)
           $.magnificPopup.open({
               items: {
                   src: targetEl.attr('href')
@@ -245,9 +204,7 @@ $(document).ready(function() {
               closeOnContentClick: true,
               midClick: true
           });
-        })
-
-
+        });
     }
 
 
@@ -385,7 +342,25 @@ $(document).ready(function() {
                     $wrapper.find('.label').html($wrapper.find('.label').data('value'));
                 }
             });
-        })
+        });
+
+        $('[js-select-okrug]').on('selectric-select', function(event, element, selectric) {
+            var curVal = $(element).val();
+            var novomosc = $('[js-opened-novomosc]');
+            var troitsk = $('[js-opened-troitsk]');
+
+            if ( curVal == "Новомосковский" ){
+              novomosc.attr('disabled', false).addClass('active').selectric('refresh');
+              troitsk.attr('disabled', true).removeClass('active').selectric('refresh');
+            } else if ( curVal == "Троицкий" ){
+              novomosc.attr('disabled', true).removeClass('active').selectric('refresh');
+              troitsk.attr('disabled', false).addClass('active').selectric('refresh');
+            } else {
+              novomosc.attr('disabled', true).addClass('active').selectric('refresh');
+              troitsk.attr('disabled', true).removeClass('active').selectric('refresh');
+            }
+        });
+
 
     }
 
@@ -685,7 +660,9 @@ $(document).ready(function() {
 
         ////////
         // FORMS
-
+        _document.on('submit', '[js-validate-property-add]', function(e){
+          e.preventDefault();
+        })
 
         /////////////////////
         // REGISTRATION FORM
@@ -696,14 +673,20 @@ $(document).ready(function() {
             unhighlight: validateUnhighlight,
             submitHandler: validateSubmitHandler,
             rules: {
-                name: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
                 password: {
                     required: true,
                     minlength: 6,
                 }
             },
             messages: {
-                name: "Заполните это поле",
+                email: {
+                    required: "Заполните это поле",
+                    email: "Email содержит неправильный формат"
+                },
                 password: {
                     required: "Заполните это поле",
                     minlength: "Пароль мимимум 6 символов"

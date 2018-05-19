@@ -118,11 +118,12 @@ block content
                 .ui-group
                   label Округ
                   select(js-selectric js-select-okrug).bordered.okrug
+                    option(disabled) Округ
                     option Новомосковский
                     option Троицкий
                 .ui-group
                   label Поселение
-                  select(js-selectric js-opened-novomosc disabled).bordered.absolute.novomosc
+                  select(js-selectric js-opened-novomosc disabled).bordered.absolute.novomosc.active
                     option Внуковское
                     option Воскресенское
                     option Десёновское
