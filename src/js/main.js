@@ -541,12 +541,24 @@ $(document).ready(function() {
                     $('[js-set-placemark]').keydown();
                 });
             });
+
+
+            // suggestons
+            var suggestInput = $('[js-map-suggestions]').get(0);
+            var suggestView = new ymaps.SuggestView(suggestInput,{
+              // options
+              offset: [-1, 5]
+            });
+            // trigger update
+            suggestView.events.add('select', function (event) {
+              $('[js-set-placemark]').keydown();
+            });
+
         }
 
         // input lister
         _document.
             on('keydown', '[js-set-placemark]', debounce(function(e){
-
                 var currentVal = $(this).val();
 
                 // gecoder
@@ -571,13 +583,34 @@ $(document).ready(function() {
                         }
                         // set center
                         myMap.setCenter(geoObjCoords, 14);
+                        setLatLongInputs(geoObjCoords);
                     }
 
                 }, function (err) {
-                    console.log(err.message);
+                    console.log(err);
                 });
-            }, 500));
+            }, 1000));
 
+        // search by lat, long
+        _document.
+          on('keydown', '[js-set-lat], [js-set-long]', debounce(function(e){
+              var latVal = $('[js-set-lat]').val();
+              var longVal = $('[js-set-long]').val();
+              function isLatitude(lat) {return lat.length > 3 && isFinite(lat) && Math.abs(lat) <= 90;}
+              function isLongitude(lng) {return lng.length > 3 && isFinite(lng) && Math.abs(lng) <= 180;}
+
+              if ( isLatitude(latVal) && isLongitude(longVal) ){
+                // geocode from pos
+                ymaps.geocode([latVal, longVal]).then(function (res) {
+                    var newObj = res.geoObjects.get(0);
+                    var newObjName = newObj.properties.get('name');
+
+                    $('[js-set-placemark]').val(newObjName);
+                    $('[js-set-placemark]').keydown();
+                });
+              }
+
+          }, 1000));
 
         function attachReverseGeocode() {
             // reverse geocoding
@@ -590,10 +623,15 @@ $(document).ready(function() {
                     var newObjName = newObj.properties.get('name');
 
                     $('[js-set-placemark]').val(newObjName);
+                    setLatLongInputs(newPos);
                     // myMap.setCenter(newPos, 14);
                 });
             }, dynamicPlacemark);
+        }
 
+        function setLatLongInputs(data){
+          $('[js-set-lat]').val(data[0]);
+          $('[js-set-long]').val(data[1]);
         }
     }
 

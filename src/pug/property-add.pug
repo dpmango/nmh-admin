@@ -11,7 +11,7 @@ block content
         // Include sidebar
         include components/_sidebar
         .property
-          form(action="#" method="post" enctype="multipart/form-data")
+          form(action="#" method="post" enctype="multipart/form-data" js-validate-property-add)
             .property__info
               p #4230 (опубликован)
               p 12.04.2017 (обновлен 16.06.2018)
@@ -163,7 +163,14 @@ block content
                   label км от МКАД
                   input.h-input(type="text" value="25")
               .ui-group
-                input(type="text" placeholder="Поиск адреса на карте" js-set-placemark)
+                input(type="text" placeholder="Поиск адреса на карте" js-set-placemark js-map-suggestions)
+              .property__grid.items-2
+                .ui-group
+                  label Ширина
+                  input(type="text" placeholder="55.753215" js-set-lat)
+                .ui-group
+                  label Долгота
+                  input(type="text" placeholder="37.622504" js-set-long)
               .ui-group
                 .property__map
                   #property-map
