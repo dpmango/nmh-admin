@@ -42,6 +42,9 @@
 			font-size: 0
 			line-height: 1
 			transition: .25s $ease
+			overflow: hidden;
+			width: 80px;
+			height: 45px;
 			&:after
 				display: block
 				width: 100%
@@ -76,6 +79,15 @@
 				max-width: 80px
 				width: 100%
 				height: auto
+				position: absolute
+				left: 50%
+				top: 50%
+				transform: translate(-50%, -50%)
+		.list-link
+			font-weight: 600
+			transition: .25s $ease
+			&:hover
+				color: rgba($fontColor, 0.7)
 	&__change
 		display: inline-block
 		width: 29px

@@ -12,12 +12,13 @@ block content
         include components/_sidebar
         .property
           form(action="#" method="post" enctype="multipart/form-data" js-validate-property-add)
+            include components/_status-bar
             .property__info
               p #4230 (опубликован)
               p 12.04.2017 (обновлен 16.06.2018)
               .property__buttons
                 button.btn.btn-cancel удалить
-                button.btn.btn-primary сохранить
+                button.btn.btn-primary(js-btn-save) сохранить
             h3.property__heading Об объекте
             .property__container
               p.p-label Url
@@ -50,7 +51,7 @@ block content
                   input(type="text" js-mask-numbers value="")
                 .ui-group
                   label Цена
-                  input.input-price(type="text" js-mask-price value="150 000 000")
+                  input.input-price(type="text" js-mask-number-price value="150 000 000")
               .property__grid.items-3.no-margin
                 .ui-group
                   label Тип дома
@@ -149,7 +150,7 @@ block content
               .property__grid.items-3
                 .ui-group
                   label Населенный пункт
-                  input.height-input(type="text" placeholder="Введите название")
+                  input.height-input(type="text" placeholder="Введите название" js-autocomplete)
                 .ui-group
                   label Шоссе
                   select(js-selectric).bordered
@@ -233,7 +234,7 @@ block content
               p 12.04.2017 (обновлен 16.06.2018)
               .property__buttons
                 button.btn.btn-cancel удалить
-                button.btn.btn-primary сохранить
+                button.btn.btn-primary(js-btn-save) сохранить
 
         include components/_right-sidebar
   //- block footer

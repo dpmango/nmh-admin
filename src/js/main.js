@@ -93,7 +93,7 @@ $(document).ready(function() {
 
         // sidebar
         .on('click', '.sidebar li a', function() {
-            $('.sidebar li').removeClass('is-active');
+            $('.sidebar__secondary li').removeClass('is-active');
             $(this).parent().addClass('is-active');
         })
         .on('mouseup', function(e) {
@@ -108,6 +108,13 @@ $(document).ready(function() {
         .on('click', '[js-open-menu]', function() {
             $(this).toggleClass('is-active');
             $(this).parent().toggleClass('is-open');
+        })
+
+        .on('click', '[js-btn-save]', function() {
+            $('.status-bar').fadeIn();
+            setTimeout(function(){
+              $('.status-bar').fadeOut()
+            }, 4000)
         })
 
         // PROPERTY LIST CHANGE
@@ -439,7 +446,7 @@ $(document).ready(function() {
 
         $("[js-mask-numbers]").mask("#");
         $("[js-mask-floor]").mask("99/99");
-        $("[js-mask-price]").mask('999 999 999 999', {reverse: true});
+        $("[js-mask-number-price]").mask('999 999 999 999');
 
         // $('form').on('focus', 'input[type=number]', function(e) {
         //     $(this).on('wheel', function(e) {
