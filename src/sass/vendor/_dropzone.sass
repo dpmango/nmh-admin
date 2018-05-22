@@ -194,8 +194,14 @@
 
     &.dz-success .dz-success-mark
       // animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1)
-    &.dz-error .dz-error-mark
-      opacity: 1
+    &.dz-error
+      .dz-image
+        img
+          pointer-events: none
+        &::before
+          display: none
+      .dz-error-mark
+        opacity: 1
       // animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1)
     .dz-success-mark, .dz-error-mark
       pointer-events: none

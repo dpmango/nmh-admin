@@ -227,17 +227,22 @@ $(document).ready(function() {
 
             Dropzone.autoDiscover = false;
 
+            // var uploadUrl = "http://nmh.khmelevskoy.club/upload";
+            var uploadUrl = "http://localhost:8080/";
+
             var dropzone = new Dropzone('[js-add-photos]', {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                url: "http://localhost:8080/upload",
+                url: uploadUrl,
                 parallelUploads: 2,
                 thumbnailHeight: 65,
                 thumbnailWidth: 100,
                 maxFilesize: 3,
                 filesizeBase: 1000,
                 addRemoveLinks: true,
-                success: function(file){
-                  console.log('sucess', file)
+                success: function(file, resp){
+                  var fileName = resp.originalname;
+                  var fileUrl = uploadUrl + resp.path;
+                  $('img[href="'+fileName+'"]').attr('href', fileUrl)
                 },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
@@ -247,7 +252,7 @@ $(document).ready(function() {
                             var thumbnailElement = images[i];
                             thumbnailElement.alt = file.name;
                             thumbnailElement.src = dataUrl;
-                            $(thumbnailElement).attr('href', dataUrl);
+                            $(thumbnailElement).attr('href', file.name);
                         }
                         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
                     }
@@ -257,7 +262,7 @@ $(document).ready(function() {
             // plans
             var dropzone2 = new Dropzone('[js-add-plans]', {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                url: "http://localhost:8080/upload",
+                url: uploadUrl,
                 parallelUploads: 2,
                 thumbnailHeight: 65,
                 thumbnailWidth: 100,
