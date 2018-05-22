@@ -61,4 +61,9 @@
 		// background: url(../img/delete.svg) center center no-repeat
 		background: svg-load('../icons/delete.svg', fill=#000) center center no-repeat
 		background-size: contain
+		transition: .45s $ease
+	    transform-origin: center center
+		&:hover
+			transform: rotate(180deg) translateY(50%)
+
 	

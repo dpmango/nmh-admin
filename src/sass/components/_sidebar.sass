@@ -6,10 +6,12 @@
 		font-size: 16px
 		margin: 0
 		color: rgba($fontColor, 0.09)
+		font-weight: 700
 	ul
 		padding: 0
 	&__main
 		margin: 0
+		font-weight: 700
 		li
 			margin-top: 21px
 			display: list-item
@@ -31,27 +33,15 @@
 			margin: 0 auto 6px
 			position: relative
 			display: list-item
+			font-weight: 400
 			&.is-active
 				font-weight: 700
 				background: darken(#F6F6F6, 3%)
-				// &:after
-				// 	display: block
-				// 	content: ''
-				// 	width: 3px
-				// 	height: 100%
-				// 	position: absolute
-				// 	left: 0
-				// 	top: 0
-				// 	background: $colorPrimary
-				// 	border-radius: 10px
-				// 	box-shadow: 0 0 1px 0 rgba(0,0,0,0.35)
 		a
 			font-size: 14px
 			padding-left: 20px
 			&:hover
-				background: 
 				background: darken(#F6F6F6, 3%)
-				// font-weight: 700
 	&__back
 		display: flex
 		align-items: center
@@ -90,10 +80,9 @@
 	.sidebar
 		position: fixed
 		height: 100vh
-		
 		top: 0
 		padding-top: 62px
-		// overflow-y: scroll
+		overflow-y: scroll
 		border-right: 1px solid #eee
 		transition: all $transitionSpeed ease-in-out
 		margin-right: 0
@@ -118,5 +107,7 @@
 		&__wrapper
 			&.is_stuck
 				position: static !important
+		&__main
+			margin-bottom: 40px
 	.right
 		display: none

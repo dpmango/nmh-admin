@@ -35,22 +35,22 @@ block content
               .property__grid.items-6
                 .ui-group
                   label Кв.м
-                  input(type="text" value="325")
+                  input(type="text" js-mask-numbers value="325")
                 .ui-group
                   label Спальни
-                  input(type="text" value="5")
+                  input(type="text" js-mask-numbers value="5")
                 .ui-group
                   label С/у
-                  input(type="text" value="")
+                  input(type="text" js-mask-numbers value="")
                 .ui-group
                   label Эт/ур.
-                  input(type="text" value="2/3")
+                  input(type="text" js-mask-floor value="2/3")
                 .ui-group
                   label Участок
-                  input(type="text" value="")
+                  input(type="text" js-mask-numbers value="")
                 .ui-group
                   label Цена
-                  input.input-price(type="text" value="15 000 000")
+                  input.input-price(type="text" js-mask-price value="150 000 000")
               .property__grid.items-3.no-margin
                 .ui-group
                   label Тип дома
@@ -83,9 +83,9 @@ block content
                 p.p-label Поэтажное описание (3-4 предложения)
                 textarea(rows="5" data-min-rows="5")
               .ui-group
-                p.p-label Поэтажное описание (3-4 предложения)
+                p.p-label Участок (1-2 предложения)
                 textarea(rows="5" data-min-rows="5")
-              p.p-label Поэтажное описание (3-4 предложения)
+              p.p-label Коммуникации
               .property__grid.items-4.no-margin
                 .ui-group
                   label Газ
@@ -161,7 +161,7 @@ block content
                     option Рублёво-Успенское
                 .ui-group
                   label км от МКАД
-                  input.h-input(type="text" value="25")
+                  input.h-input(type="text" js-mask-numbers value="25")
               .ui-group
                 input(type="text" placeholder="Поиск адреса на карте" js-set-placemark js-map-suggestions)
               .property__grid.items-2

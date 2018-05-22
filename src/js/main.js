@@ -391,6 +391,24 @@ $(document).ready(function() {
         $("input[type='tel']").mask("+7 (000) 000-0000", { placeholder: "+7 (___) ___-____" });
         $("[js-mask-number]").mask("999 999 999");
 
+
+        $("[js-mask-numbers]").mask("#");
+        $("[js-mask-floor]").mask("99/99");
+        $("[js-mask-price]").mask('999 999 999 999', {reverse: true});
+
+        // $('form').on('focus', 'input[type=number]', function(e) {
+        //     $(this).on('wheel', function(e) {
+        //         e.preventDefault();
+        //     });
+        // });
+        // $('form').on('blur', 'input[type=number]', function(e) {
+        //     $(this).off('wheel');
+        // });
+        // $('form').on('keydown', 'input[type=number]', function(e) {
+        //     if ( e.which == 38 || e.which == 40 )
+        //         e.preventDefault();
+        // }); 
+
         _document
             .on('keydown', '[js-mask-price]', function(e) {
                 // https://stackoverflow.com/questions/22342186/textbox-mask-allow-number-only
