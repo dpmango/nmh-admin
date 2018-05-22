@@ -245,8 +245,8 @@ $(document).ready(function() {
 
             Dropzone.autoDiscover = false;
 
-            // var uploadUrl = "http://nmh.khmelevskoy.club/";
-            var uploadUrl = "http://localhost:8090/";
+            var uploadUrl = "http://nmh.khmelevskoy.club/";
+            // var uploadUrl = "http://localhost:8090/";
 
             var dropzone = new Dropzone('[js-add-photos]', {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
