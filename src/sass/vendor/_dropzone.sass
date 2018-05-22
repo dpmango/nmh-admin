@@ -33,8 +33,11 @@
       cursor: pointer
       *
         cursor: pointer
-  &.dz-started .dz-message
-    display: none
+  &.dz-started
+    .dz-message
+      display: none
+    .dz-add
+      display: inline-flex
   &.dz-drag-hover
     &:after
       opacity: 1
@@ -64,6 +67,8 @@
     margin: 16px
     height: 65px
     margin: 7px
+    ccursor: move
+    cursor: grab
     &--with-input
       margin-bottom: 45px
     &:hover
@@ -301,7 +306,38 @@
         text-align: center
         font-size: 10px
 
+  .dz-add
+    flex: 0 0 auto
+    border-radius: 4px
+    overflow: hidden
+    width: 100px
+    height: 65px
+    border: 1px solid #D8D8D8
+    display: none
+    align-items: center
+    color: #D8D8D8
+    justify-content: center
+    margin: 7px
+    // pointer-events: none
+    cursor: pointer
+    transition: .25s $ease
+    .ico
+      font-size: 13px
+    &:hover, &.is-hovered
+      color: $colorPrimary
+      border-color: $colorPrimary
 
+.sortable-ghost
+  opacity: .5
+.sortable-chosen
+  .dz-image
+    &::before, &::after
+      display: none
+.sortable-drag
+  opacity: 1
+  .dz-image
+    &::before, &::after
+      display: none
 
 @-webkit-keyframes passing-through
   0%

@@ -176,21 +176,25 @@ block content
                   #property-map
             h3.property__heading Фотографии
             .property__container.property__container--photos
-              .dropzone.needsclick(js-add-photos action='/upload' method="POST" enctype="multipart/form-data")
+              .dropzone.needsclick(js-add-photos data-dropzone-id="1" action='/upload' method="POST" enctype="multipart/form-data")
                 .dz-message.needsclick
                   | Перетащите файлы
                   br
                   | или 
                   span открыть
+                .dz-add
+                  +icon('ico-dz-plus')
 
             h3.property__heading Планировки
             .property__container.property__container--photos
-              .dropzone.needsclick(js-add-plans action='/upload' method="POST" enctype="multipart/form-data")
+              .dropzone.needsclick(js-add-plans data-dropzone-id="2" action='/upload' method="POST" enctype="multipart/form-data")
                 .dz-message.needsclick
                   | Перетащите файлы
                   br
                   | или 
                   span открыть
+                .dz-add
+                  +icon('ico-dz-plus')
               
               // tpl for js-add-plans
               .property__tpl(js-preview-template-plans)

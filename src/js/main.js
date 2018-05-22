@@ -34,6 +34,7 @@ $(document).ready(function() {
         initDatepicker();
         initTeleport();
         initDropzone();
+        initSortable();
     }
 
     // this is a master function which should have all functionality
@@ -221,14 +222,31 @@ $(document).ready(function() {
         $('.datepicker').data('datepicker');
     };
 
+    // SORTABLE (for DZ Uploads)
+    function initSortable(){
+      var dropzones = $('.dropzone');
+      if ( dropzones.length > 0 ){
+        dropzones.each(function(i, dropzone){
+          // https://github.com/RubaXa/Sortable
+          var sortable = Sortable.create( dropzone, {
+            filter: ".dz-message, .dz-add",
+            forceFallback: true,
+            fallbackTolerance: 3,
+            touchStartThreshold: 3,
+          } );
+        })
+      }
+    }
+
+
     // ADD PHOTOS - DROPZONE JS
     function initDropzone() {
         if ($("[js-add-photos]").length > 0) {
 
             Dropzone.autoDiscover = false;
 
-            // var uploadUrl = "http://nmh.khmelevskoy.club/upload";
-            var uploadUrl = "http://localhost:8080/";
+            // var uploadUrl = "http://nmh.khmelevskoy.club/";
+            var uploadUrl = "http://localhost:8090/";
 
             var dropzone = new Dropzone('[js-add-photos]', {
                 // previewTemplate: document.querySelector('#preview-template').innerHTML,
@@ -242,7 +260,9 @@ $(document).ready(function() {
                 success: function(file, resp){
                   var fileName = resp.originalname;
                   var fileUrl = uploadUrl + resp.path;
-                  $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                  setTimeout(function(){
+                    $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                  }, 300)
                 },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
@@ -255,6 +275,8 @@ $(document).ready(function() {
                             $(thumbnailElement).attr('href', file.name);
                         }
                         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+
+                        keepDzAddLastChild(1);
                     }
                 }
             });
@@ -269,8 +291,13 @@ $(document).ready(function() {
                 maxFilesize: 3,
                 filesizeBase: 1000,
                 addRemoveLinks: true,
-                success: function(file){
-                  console.log('sucess', file)
+                success: function(file, resp){
+                  var fileName = resp.originalname;
+                  var fileUrl = uploadUrl + resp.path;
+                  setTimeout(function(){
+                    $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                  }, 300);
+
                 },
                 thumbnail: function(file, dataUrl) {
                     if (file.previewElement) {
@@ -280,13 +307,26 @@ $(document).ready(function() {
                             var thumbnailElement = images[i];
                             thumbnailElement.alt = file.name;
                             thumbnailElement.src = dataUrl;
-                            $(thumbnailElement).attr('href', dataUrl);
+                            $(thumbnailElement).attr('href', file.name);
                         }
                         setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+
+                        keepDzAddLastChild(2);
                     }
                 },
                 previewTemplate: $('[js-preview-template-plans]').html()
             });
+
+            // emulate dz add click
+            _document
+              .on('click', '.dz-add', function(){
+                $(this).closest('.dropzone').click();
+              })
+
+            function keepDzAddLastChild(dropzoneID){
+              var parentDropzone = $('.dropzone[data-dropzone-id="'+dropzoneID+'"]');
+              parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
+            }
         };
     };
 
@@ -412,7 +452,7 @@ $(document).ready(function() {
         // $('form').on('keydown', 'input[type=number]', function(e) {
         //     if ( e.which == 38 || e.which == 40 )
         //         e.preventDefault();
-        // }); 
+        // });
 
         _document
             .on('keydown', '[js-mask-price]', function(e) {
