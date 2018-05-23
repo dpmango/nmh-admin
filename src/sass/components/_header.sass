@@ -69,6 +69,7 @@
         // bottom: -49px
         opacity: 1
         transform: translate(0,0)
+        pointer-events: all
   &__user-drop
     position: absolute
     padding: 15px 22px
@@ -83,7 +84,9 @@
     transform: translate(15px,0px)
     // bottom: -59px
     opacity: 0
-
+    pointer-events: none
+    &:hover
+      color: $colorPrimary
 
   &.is-fixed
     transform: translate3d(0,-100%,0)

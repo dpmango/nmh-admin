@@ -7,16 +7,17 @@
     a.sidebar__index(href="/login.html") Главная
     ul.sidebar__main
       li
-        a(href="/property-list.html") Недвижимость
+        a(href="property-list.html") Недвижимость
         ul.sidebar__secondary
+          // .is-active for li to be add with js or backed
           li
-            a(href="/property-list.html") Все записи
+            a(href="property-list.html") Все обьекты
           li
-            a.no-barba(href="#") Черновики
+            a(href="#") Черновики
           li
-            a(href="/categories.html") Категории
-          li.is-active
-            a(href="/tags.html") Теги
+            a(href="categories.html") Категории
+          li
+            a(href="tags.html") Теги
       li
         a(href="#") Блог
     //- a.sidebar__back(href="#")

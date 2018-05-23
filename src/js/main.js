@@ -24,17 +24,21 @@ $(document).ready(function() {
     ////////////
     function pageReady() {
         legacySupport();
+
+        initTeleport();
         initSticky();
         initSelectric();
         initMasks();
         initPopups();
         initAutocompleate();
-        initValidations();
-        initMaps();
         initDatepicker();
-        initTeleport();
         initDropzone();
         initSortable();
+        initMaps();
+        initValidations();
+
+        updateSidebarActiveClass();
+        closeSidebar();
     }
 
     // this is a master function which should have all functionality
@@ -92,16 +96,9 @@ $(document).ready(function() {
         })
 
         // sidebar
-        .on('click', '.sidebar li a', function() {
-            $('.sidebar__secondary li').removeClass('is-active');
-            $(this).parent().addClass('is-active');
-        })
-        .on('mouseup', function(e) {
-            var div = $("[js-sidebar]");
-            if (!div.is(e.target) &&
-                div.has(e.target).length === 0) {
-                $('.sidebar').removeClass('is-open');
-                $('.show-menu-link').removeClass('is-active');
+        .on('click', function(e) {
+            if (!$(e.target).closest("[js-sidebar]").length === 0) {
+              closeSidebar();
             }
         })
 
@@ -137,12 +134,28 @@ $(document).ready(function() {
             $(this).parents('.content__item').find('.c-edit').slideToggle();
         })
 
+    function closeSidebar(){
+      $('.sidebar').removeClass('is-open');
+      $('.show-menu-link').removeClass('is-active');
+    }
+
+    // SET ACTIVE CLASS IN HEADER
+    // * could be removed in production and server side rendering when header is inside barba-container
+    function updateSidebarActiveClass(){
+      $('.sidebar__secondary li').each(function(i,val){
+        if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
+          $(val).addClass('is-active');
+        } else {
+          $(val).removeClass('is-active')
+        }
+      });
+    }
 
     ////////////
     // AUTOCOMPLEATE
     ////////////
     function initAutocompleate() {
-        var autocompleate = $('[js-autocomplete]');
+        var autocompleate = _document.find('[js-autocomplete]');
 
         if (autocompleate.length > 0) {
             autocompleate.each(function(i, input) {
@@ -250,6 +263,7 @@ $(document).ready(function() {
 
 
     // ADD PHOTOS - DROPZONE JS
+    var dropzone, dropzone2;
     function initDropzone() {
         if ($("[js-add-photos]").length > 0) {
 
@@ -258,74 +272,81 @@ $(document).ready(function() {
             var uploadUrl = "http://nmh.khmelevskoy.club/";
             // var uploadUrl = "http://localhost:8090/";
 
-            var dropzone = new Dropzone('[js-add-photos]', {
-                // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                url: uploadUrl,
-                parallelUploads: 2,
-                thumbnailHeight: 65,
-                thumbnailWidth: 100,
-                maxFilesize: 3,
-                filesizeBase: 1000,
-                addRemoveLinks: true,
-                success: function(file, resp){
-                  var fileName = resp.originalname;
-                  var fileUrl = uploadUrl + resp.path;
-                  setTimeout(function(){
-                    $('img[href="'+fileName+'"]').attr('href', fileUrl)
-                  }, 300)
-                },
-                thumbnail: function(file, dataUrl) {
-                    if (file.previewElement) {
-                        file.previewElement.classList.remove("dz-file-preview");
-                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                        for (var i = 0; i < images.length; i++) {
-                            var thumbnailElement = images[i];
-                            thumbnailElement.alt = file.name;
-                            thumbnailElement.src = dataUrl;
-                            $(thumbnailElement).attr('href', file.name);
-                        }
-                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+            if ( !dropzone ){
 
-                        keepDzAddLastChild(1);
-                    }
-                }
-            });
+              dropzone = new Dropzone('[js-add-photos]', {
+                  // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                  url: uploadUrl,
+                  parallelUploads: 2,
+                  thumbnailHeight: 65,
+                  thumbnailWidth: 100,
+                  maxFilesize: 3,
+                  filesizeBase: 1000,
+                  addRemoveLinks: true,
+                  success: function(file, resp){
+                    var fileName = resp.originalname;
+                    var fileUrl = uploadUrl + resp.path;
+                    setTimeout(function(){
+                      $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                    }, 300)
+                  },
+                  thumbnail: function(file, dataUrl) {
+                      if (file.previewElement) {
+                          file.previewElement.classList.remove("dz-file-preview");
+                          var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                          for (var i = 0; i < images.length; i++) {
+                              var thumbnailElement = images[i];
+                              thumbnailElement.alt = file.name;
+                              thumbnailElement.src = dataUrl;
+                              $(thumbnailElement).attr('href', file.name);
+                          }
+                          setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+
+                          keepDzAddLastChild(1);
+                      }
+                  }
+              });
+
+            } // end if
 
             // plans
-            var dropzone2 = new Dropzone('[js-add-plans]', {
-                // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                url: uploadUrl,
-                parallelUploads: 2,
-                thumbnailHeight: 65,
-                thumbnailWidth: 100,
-                maxFilesize: 3,
-                filesizeBase: 1000,
-                addRemoveLinks: true,
-                success: function(file, resp){
-                  var fileName = resp.originalname;
-                  var fileUrl = uploadUrl + resp.path;
-                  setTimeout(function(){
-                    $('img[href="'+fileName+'"]').attr('href', fileUrl)
-                  }, 300);
+            if ( !dropzone2 ){
+              dropzone2 = new Dropzone('[js-add-plans]', {
+                  // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                  url: uploadUrl,
+                  parallelUploads: 2,
+                  thumbnailHeight: 65,
+                  thumbnailWidth: 100,
+                  maxFilesize: 3,
+                  filesizeBase: 1000,
+                  addRemoveLinks: true,
+                  success: function(file, resp){
+                    var fileName = resp.originalname;
+                    var fileUrl = uploadUrl + resp.path;
+                    setTimeout(function(){
+                      $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                    }, 300);
 
-                },
-                thumbnail: function(file, dataUrl) {
-                    if (file.previewElement) {
-                        file.previewElement.classList.remove("dz-file-preview");
-                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                        for (var i = 0; i < images.length; i++) {
-                            var thumbnailElement = images[i];
-                            thumbnailElement.alt = file.name;
-                            thumbnailElement.src = dataUrl;
-                            $(thumbnailElement).attr('href', file.name);
-                        }
-                        setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                  },
+                  thumbnail: function(file, dataUrl) {
+                      if (file.previewElement) {
+                          file.previewElement.classList.remove("dz-file-preview");
+                          var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                          for (var i = 0; i < images.length; i++) {
+                              var thumbnailElement = images[i];
+                              thumbnailElement.alt = file.name;
+                              thumbnailElement.src = dataUrl;
+                              $(thumbnailElement).attr('href', file.name);
+                          }
+                          setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
 
-                        keepDzAddLastChild(2);
-                    }
-                },
-                previewTemplate: $('[js-preview-template-plans]').html()
-            });
+                          keepDzAddLastChild(2);
+                      }
+                  },
+                  previewTemplate: $('[js-preview-template-plans]').html()
+              });
+
+            } // end if
 
             // emulate dz add click
             _document
@@ -566,7 +587,6 @@ $(document).ready(function() {
     Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
 
         pageReady();
-        closeMobileMenu();
 
     });
 

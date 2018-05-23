@@ -9,9 +9,9 @@
     position: relative
     z-index: 3
     &:focus
-      border-color: transparent !important
-      border-bottom-left-radius: 0px
-      border-bottom-right-radius: 0px
+      // border-color: transparent !important
+      // border-bottom-left-radius: 0px
+      // border-bottom-right-radius: 0px
   a
     display: block
 
@@ -39,7 +39,7 @@
       display: block
       font-size: 16px
       font-weight: normal
-      padding: 10px 20px
+      // padding: 10px 20px
     li
       transition: .25s $ease
       &:last-child
@@ -51,6 +51,7 @@
         div
           font-weight: normal
       div
+        padding: 10px 20px
         display: block
         font-weight: normal
         word-break: break-all
@@ -59,3 +60,9 @@
     .eac-category
       font-color: #aaa
       font-style: italic
+
+.tag__input
+  .easy-autocomplete-container
+    ul
+      li, .eac-category
+        font-size: 13px
