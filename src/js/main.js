@@ -97,7 +97,7 @@ $(document).ready(function() {
             $(this).parent().addClass('is-active');
         })
         .on('mouseup', function(e) {
-            var div = $("#sidebar");
+            var div = $("[js-sidebar]");
             if (!div.is(e.target) &&
                 div.has(e.target).length === 0) {
                 $('.sidebar').removeClass('is-open');
@@ -111,10 +111,13 @@ $(document).ready(function() {
         })
 
         .on('click', '[js-btn-save]', function() {
-            $('.status-bar').fadeIn();
+            $('[js-status-bar-num]').html('#4842');
+            $('[js-status-bar-action]').html('Объект сохранен');
+
+            $('.status-bar').addClass('is-active');
             setTimeout(function(){
-              $('.status-bar').fadeOut()
-            }, 4000)
+              $('.status-bar').removeClass('is-active')
+            }, 3000)
         })
 
         // PROPERTY LIST CHANGE

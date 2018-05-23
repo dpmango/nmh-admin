@@ -1,18 +1,21 @@
 .status-bar
 	background: #fff
-	border-radius: 4px
 	border: 1px solid $borderColor
-	padding: 22px 15px
+	padding: 20px 15px 21px
 	position: fixed
 	left: 0
-	top: 90px
-	width: 91%
-	max-width: 1170px
-	// min-width: 768px
-	left: 50%
-	transform: translateX(-50%)
-	z-index: 2
-	display: none
+	top: 0px
+	left: 0
+	right: 0
+	z-index: 11
+	transform: translate3d(0,-100%,0)
+	opacity: 0
+	pointer-events: none
+	transition: .25s $ease
+	&.is-active
+		opacity: 1
+		transform: translate3d(0,0%,0)
+		pointer-events: all
 	p
 		color: $fontColor
 		margin: 0 5px 0 0

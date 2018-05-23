@@ -66,8 +66,9 @@
         width: 100%
     &:hover
       .header__user-drop
-        bottom: -49px
+        // bottom: -49px
         opacity: 1
+        transform: translate(0,0)
   &__user-drop
     position: absolute
     padding: 15px 22px
@@ -78,6 +79,8 @@
     transition: .25s $ease
     right: 0
     bottom: 0
+    bottom: -49px
+    transform: translate(15px,0px)
     // bottom: -59px
     opacity: 0
 

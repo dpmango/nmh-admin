@@ -1,7 +1,7 @@
 // Right-Sidebar
 .right
 	.right__wrapper(js-sticky)
-		div(js-teleport data-teleport-to="mobile-select" data-teleport-condition="<1068")
+		div(js-teleport data-teleport-to="mobile-right-sidebar" data-teleport-condition="<1068")
 			p.p-label Категория
 			.right__container
 				.ui-checkbox
@@ -33,15 +33,15 @@
 			p.p-label Теги
 			.right__container
 				ul.tags
-					li.tags__added Web Deisgn
+					li.tags__added Гараж
 						span(js-remove-tag)
-						input(type="hidden", name="tags[]", value="Web Deisgn")
-					li.tags__added Web Develop
+						input(type="hidden", name="tags[]", value="Гараж")
+					li.tags__added КП “Ватутинки”
 						span(js-remove-tag)
-						input(type="hidden", name="tags[]", value="Web Develop")
-					li.tags__added SEO
+						input(type="hidden", name="tags[]", value="КП “Ватутинки”")
+					li.tags__added У воды
 						span(js-remove-tag)
-						input(type="hidden", name="tags[]", value="SEO")
+						input(type="hidden", name="tags[]", value="У воды")
 					li.tag__input
 						.ui-group
 							input(type="text" js-search-field)
