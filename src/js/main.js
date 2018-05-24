@@ -31,6 +31,7 @@ $(document).ready(function() {
         initMasks();
         initPopups();
         initAutocompleate();
+        initAutoExp();
         initDatepicker();
         initDropzone();
         initSortable();
@@ -446,20 +447,23 @@ $(document).ready(function() {
     }
 
     // textarea autoExpand
-    _document
-        .one('focus.autoExpand', '.ui-group textarea', function() {
+    function initAutoExp(){
+      _document.find('.ui-group textarea').each(function(i, textarea){
+        $(textarea).one('focus.autoExpand', function() {
             var savedValue = this.value;
             this.value = '';
             this.baseScrollHeight = this.scrollHeight;
             this.value = savedValue;
         })
-        .on('input.autoExpand', '.ui-group textarea', function() {
+        $(textarea).on('input.autoExpand', function() {
             var minRows = this.getAttribute('data-min-rows') | 0,
                 rows;
             this.rows = minRows;
             rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
             this.rows = minRows + rows;
         });
+      })
+    }
 
     // Masked input
     function initMasks() {

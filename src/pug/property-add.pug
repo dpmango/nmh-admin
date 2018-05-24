@@ -57,6 +57,7 @@ block content
                 .ui-group
                   label Тип дома
                   select(js-selectric).bordered
+                    option(disabled selected) Не указан
                     option Кирпичный
                     option Монолитный
                     option Деревянный
@@ -64,6 +65,7 @@ block content
                 .ui-group
                   label Ремонт
                   select(js-selectric).bordered
+                    option(disabled selected) Не указан
                     option Под ключ
                     option Под чистовую отделку
                     option Без отделки
@@ -120,7 +122,7 @@ block content
                 .ui-group
                   label Округ
                   select(js-selectric js-select-okrug).bordered.okrug
-                    option(disabled) Округ
+                    option(disabled selected) Округ
                     option Новомосковский
                     option Троицкий
                 .ui-group
