@@ -8,6 +8,7 @@
     text-align: center
     letter-spacing: 0.08em
     margin-bottom: 20px
+    font-weight: 400
     color: rgba($fontColor, .5)
   &__list
     margin: 0
@@ -23,9 +24,10 @@
       &:last-child
         margin-right: 0
       &.is-active
+        pointer-events: none
         a
           border-color: $colorPrimary
-      &:hover
+      &:hover:not(.is-active)
         a
           border-color: $fontColor
     a
@@ -43,9 +45,22 @@
     position: relative
     a
       display: flex
+      font-weight: 400
       align-items: center
     .ico
       font-size: 8px
+
+  &__list
+    li.pagination__prev, li.pagination__last
+      &.is-active
+        a
+          border-color: transparent
+      &:hover
+        a
+          border-color: transparent
+          color: $fontColor
+          font-weight: 700
+
 
   &__prev
     .ico

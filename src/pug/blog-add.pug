@@ -1,0 +1,144 @@
+---
+title: Добавить блог
+---
+extends shared/_layout
+
+block content
+  include components/_status-bar
+  
+  // Property-add page
+  .admin
+    .container
+      .admin__wrapper
+        // Include sidebar
+        include components/_sidebar
+        .property
+          form(action="#" method="post" enctype="multipart/form-data" js-validate-property-add)
+            .property__info
+              p #4230 (опубликован)
+              p 12.04.2017 (обновлен 16.06.2018)
+              .property__buttons
+                button.btn.btn-cancel удалить
+                button.btn.btn-primary(js-btn-save) сохранить
+            h3.property__heading Информация о статье
+            .property__container
+              p.p-label Url
+              .property__grid.items-url
+                p.p-label
+                p.p-url https://newmoscowhouse.ru/blog/
+                .ui-group
+                  input(type="text" value="elitnie-kottedzgnie-poselki-novoy-moskvi")
+              .ui-group
+                p.p-label Заголовок статьи (H1 + SEO Title)
+                input(type="text" value="Элитные коттеджные поселки Новой Москвы")
+              .ui-group
+                p.p-label Первое предложение (+ SEO Description)
+                textarea(rows="2" data-min-rows="2") За последние годы рынок элитной загородной недвижимости Новой Москвы существенно изменился и вырос.
+            
+            // next section
+            h3.property__heading Абзац (#1)
+            .property__container
+              .ui-group
+                p.p-label Заголовок (H2)
+                input(type="text" value="КП “Антоновка”")
+              .ui-group
+                p.p-label Текст
+                textarea.lh-2(rows="10" data-min-rows="10") Данное направление считается весьма востребованным среди покупателей, однако многие не могут определиться с выбором. Мы решили помочь им в этом деле и составили небольшой рейтинг из 6 наиболее известных коттеджных поселков Новой Москвы, относящихся к элитному сегменту. Прежде всего, стоит определить, какие признаки должен иметь такой поселок.
+                  |
+                  | 
+                  | Этот поселок находится в ближней части Новой Москвы и состоит из двух участков, один из которых («Антоновка-2») расположен в уютной лесистой местности, среди могучих дубов, сосен, елей и берез. Через него протекает река Сосенка, набережная которой была благоустроена и превращена в рекреационную зону с песчаным пляжем.
+              .ui-group
+                p.p-label Ссылка (заголовок)
+                input(type="text" value="Посмотреть предложения в КП “Антоновка”")
+              .ui-group
+                p.p-label Ссылка (url)
+                input(type="text" value="https://newmoscowhouse.ru/propertytag/kp-antonovka")
+              .ui-group
+                p.p-label YouTube (url)
+                input(type="text" value="https://youtu.be/kYKzWKb5ra8")
+                    
+              p.p-label Фотографии
+              .dropzone.needsclick(js-add-plans data-dropzone-id="2" action='/upload' method="POST" enctype="multipart/form-data")
+                .dz-message.needsclick
+                  | Перетащите файлы
+                  br
+                  | или 
+                  span открыть
+                .dz-add
+                  +icon('ico-dz-plus')
+              
+              // tpl for js-add-plans
+              .property__tpl(js-preview-template-plans)
+                .dz-preview.dz-preview--with-input
+                  .dz-image
+                    img(data-dz-thumbnail='')
+                  .dz-progress
+                    span.dz-upload(data-dz-uploadprogress='')
+                      .dz-success-mark
+                        svg(width='54px', height='54px', viewbox='0 0 54 54', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', xmlns:sketch='http://www.bohemiancoding.com/sketch/ns')
+                          g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd', sketch:type='MSPage')
+                            path#Oval-2(d='M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z', stroke-opacity='0.198794158', stroke='#747474', fill-opacity='0.816519475', fill='#FFFFFF', sketch:type='MSShapeGroup')
+                      .dz-error-mark
+                        svg(width='54px', height='54px', viewbox='0 0 54 54', version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', xmlns:sketch='http://www.bohemiancoding.com/sketch/ns')
+                          g#Page-1(stroke='none', stroke-width='1', fill='none', fill-rule='evenodd', sketch:type='MSPage')
+                            g(id='Check-+-Oval-2', sketch:type='MSLayerGroup', stroke='#747474', stroke-opacity='0.198794158', fill='#FFFFFF', fill-opacity='0.816519475')
+                              path#Oval-2(d='M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z', sketch:type='MSShapeGroup')
+                  .dz-error-message
+                    span(data-dz-errormessage='')
+                  a.dz-remove(href='javascript:undefined;', data-dz-remove='') Remove file
+                  .dz-input
+                    .ui-group
+                      input(type="text" placeholder="caption")
+
+            .property__info.property__info--bottom-position
+              p #4230 (опубликован)
+              p 12.04.2017 (обновлен 16.06.2018)
+              .property__buttons
+                button.btn.btn-cancel удалить
+                button.btn.btn-primary(js-btn-save) сохранить
+
+
+        // Right-Sidebar
+        .right
+          .right__wrapper(js-sticky)
+            div(js-teleport data-teleport-to="mobile-right-sidebar" data-teleport-condition="<1068")
+              p.p-label Категория
+              .right__container
+                .ui-checkbox
+                  label Советы
+                    input(type="checkbox")
+                    span
+                .ui-checkbox
+                  label Обзоры
+                    input(type="checkbox")
+                    span
+                .ui-checkbox
+                  label Видео обзоры
+                    input(type="checkbox")
+                    span
+                .ui-checkbox
+                  label Новости
+                    input(type="checkbox")
+                    span
+                .ui-checkbox
+                  label Новости компании
+                    input(type="checkbox")
+                    span
+
+              p.p-label Автор
+              .right__container
+                .ui-checkbox
+                  label Вячеслав Люкшин
+                    input(type="checkbox")
+                    span
+                .ui-checkbox
+                  label Наталья Силеверстова
+                    input(type="checkbox")
+                    span
+              
+              p.p-label Дата
+              .right__container
+                input.datepicker(type='text' data-range='false')
+
+
+  //- block footer

@@ -1,0 +1,172 @@
+---
+title: Список обьектов
+---
+extends shared/_layout
+
+block content
+  // Property-add page
+  .admin
+    .container
+      .admin__wrapper
+        // Include sidebar
+        include components/_sidebar
+        .property__list-content
+          .property__head
+            .property__item
+              p.p-light Поиск
+              .ui-group.ui-group--search.ui-group--tags
+                input(type="text" placeholder="Поиск" js-autocomplete data-url="json/properties.json")
+                +icon('ico-search')
+            .property__item
+              p.p-light Категория
+              .ui-group
+                select(js-selectric).bordered
+                  option Все статьи
+                  option Категория 1
+                  option Категория 2
+                  option Категория 3
+            .property__item.property__item-date
+              p.p-light Период публикации
+              .ui-group.ui-group--date
+                input.datepicker(type='text' data-range='true' data-multiple-dates-separator=' - ')
+          p.p-light 3 тега
+          .property__list
+            table(cellpadding="0" cellspacing="0")
+              tr.property__list-head
+                th 
+                  .c-icon
+                    +icon('ico-icon_link')
+                th id
+                th Превью
+                th Название
+                th Дата
+                th действие
+              tr.property__list-item
+                td 
+                  a.c-link(href="#")
+                    +icon('ico-icon_link')
+                td #4230
+                td
+                  a.show-preview.no-barba(href="img/blogImage.jpg" js-open-image data-effect="mfp-zoom-in")
+                    img(src="img/blogImage.jpg", alt="")
+                td
+                  a.list-link(href="/property-add.html") Дом с мебелью и баней в КП "ВауТутинки"
+                td 12.02.2018
+                td
+                  .property__change
+                    span
+                    span
+                    span
+                    .property__change-links
+                      a(href="#") Распечатать
+                      a(href="#") Копировать ссылку
+                      a(href="#") Снять с продажи
+                      a(href="#") Удалить
+              tr.property__list-item
+                td 
+                  a.c-link(href="#")
+                    +icon('ico-icon_link')
+                td #4230
+                td
+                  a.show-preview.no-barba(href="img/blogImage.jpg" js-open-image data-effect="mfp-zoom-in")
+                    img(src="img/blogImage.jpg", alt="")
+                td
+                  a.list-link(href="/property-add.html") Дом с мебелью и баней в КП "ВауТутинки"
+
+                td 12.02.2018
+                td
+                  .property__change
+                    span
+                    span
+                    span
+                    .property__change-links
+                      a(href="#") Распечатать
+                      a(href="#") Копировать ссылку
+                      a(href="#") Снять с продажи
+                      a(href="#") Удалить
+              tr.property__list-item
+                td 
+                  a.c-link(href="#")
+                    +icon('ico-icon_link')
+                td #4230
+                td
+                  a.show-preview.no-barba(href="img/blogImage.jpg" js-open-image data-effect="mfp-zoom-in")
+                    img(src="img/blogImage.jpg", alt="")
+                td
+                  a.list-link(href="/property-add.html") Дом с мебелью и баней в КП "ВауТутинки"
+
+                td 12.02.2018
+                td
+                  .property__change
+                    span
+                    span
+                    span
+                    .property__change-links
+                      a(href="#") Распечатать
+                      a(href="#") Копировать ссылку
+                      a(href="#") Снять с продажи
+                      a(href="#") Удалить
+              tr.property__list-item
+                td 
+                  a.c-link(href="#")
+                    +icon('ico-icon_link')
+                td #4230
+                td
+                  a.show-preview.no-barba(href="img/blogImage.jpg" js-open-image data-effect="mfp-zoom-in")
+                    img(src="img/blogImage.jpg", alt="")
+                td
+                  a.list-link(href="/property-add.html") Дом с мебелью и баней в КП "ВауТутинки"
+
+                td 12.02.2018
+                td
+                  .property__change
+                    span
+                    span
+                    span
+                    .property__change-links
+                      a(href="#") Распечатать
+                      a(href="#") Копировать ссылку
+                      a(href="#") Снять с продажи
+                      a(href="#") Удалить
+              tr.property__list-item
+                td 
+                  a.c-link(href="#")
+                    +icon('ico-icon_link')
+                td #4230
+                td
+                  a.show-preview.no-barba(href="img/blogImage.jpg" js-open-image data-effect="mfp-zoom-in")
+                    img(src="img/blogImage.jpg", alt="")
+                td
+                  a.list-link(href="/property-add.html") Дом с мебелью и баней в КП "ВауТутинки"
+
+                td 12.02.2018
+                td
+                  .property__change
+                    span
+                    span
+                    span
+                    .property__change-links
+                      a(href="#") Распечатать
+                      a(href="#") Копировать ссылку
+                      a(href="#") Снять с продажи
+                      a(href="#") Удалить
+                    
+            // pagination
+            .pagination
+              .pagination__scope 11-20 из 132
+              .pagination__list
+                li.pagination__prev
+                  a(href="#")
+                    +icon('ico-arrow-left')
+                    span предыдущая
+                li
+                  a(href="#") 1
+                li.is-active
+                  a(href="#") 2
+                li
+                  a(href="#") 3
+                li.pagination__last
+                  a(href="#") 
+                    span следующая
+                    +icon('ico-arrow-right')
+  //- block footer

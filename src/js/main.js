@@ -240,10 +240,10 @@ $(document).ready(function() {
 
     // DATEPICKER
     function initDatepicker() {
-        $('.datepicker').datepicker({
+        _document.find('.datepicker').datepicker({
             dateFormat: 'M d, yyyy'
         });
-        $('.datepicker').data('datepicker');
+        _document.find('.datepicker').data('datepicker');
     };
 
     // SORTABLE (for DZ Uploads)
@@ -456,12 +456,13 @@ $(document).ready(function() {
             this.value = savedValue;
         })
         $(textarea).on('input.autoExpand', function() {
-            var minRows = this.getAttribute('data-min-rows') | 0,
-                rows;
+            var minRows = this.getAttribute('data-min-rows') | 0
+            var rows;
             this.rows = minRows;
-            rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+            rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / parseInt( $(this).css('line-height')))
             this.rows = minRows + rows;
         });
+        // $(textarea).trigger('input.autoExpand')
       })
     }
 
