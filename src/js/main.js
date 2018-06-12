@@ -266,12 +266,12 @@ $(document).ready(function() {
     // ADD PHOTOS - DROPZONE JS
     var dropzone, dropzone2;
     function initDropzone() {
+        Dropzone.autoDiscover = false;
+
+        var uploadUrl = "http://nmh.khmelevskoy.club/";
+        // var uploadUrl = "http://localhost:8090/";
+
         if ($("[js-add-photos]").length > 0) {
-
-            Dropzone.autoDiscover = false;
-
-            var uploadUrl = "http://nmh.khmelevskoy.club/";
-            // var uploadUrl = "http://localhost:8090/";
 
             if ( !dropzone ){
 
@@ -310,6 +310,9 @@ $(document).ready(function() {
 
             } // end if
 
+        }
+
+        if ($("[js-add-plans]").length > 0) {
             // plans
             if ( !dropzone2 ){
               dropzone2 = new Dropzone('[js-add-plans]', {
@@ -349,17 +352,66 @@ $(document).ready(function() {
 
             } // end if
 
-            // emulate dz add click
-            _document
-              .on('click', '.dz-add', function(){
-                $(this).closest('.dropzone').click();
-              })
-
-            function keepDzAddLastChild(dropzoneID){
-              var parentDropzone = $('.dropzone[data-dropzone-id="'+dropzoneID+'"]');
-              parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
-            }
         };
+
+        if ($("[js-add-blog]").length > 0) {
+            // plans
+            // if ( !dropzone2 ){
+            $('[js-add-blog]').each(function(i, dz){
+
+              // when initialized - do nothing
+              if ( $(dz).is('.dz-clickable') ){
+                return false;
+              }
+              new Dropzone(dz, {
+                  // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                  url: uploadUrl,
+                  parallelUploads: 2,
+                  thumbnailHeight: 65,
+                  thumbnailWidth: 100,
+                  maxFilesize: 3,
+                  filesizeBase: 1000,
+                  addRemoveLinks: true,
+                  success: function(file, resp){
+                    var fileName = resp.originalname;
+                    var fileUrl = uploadUrl + resp.path;
+                    setTimeout(function(){
+                      $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                    }, 300);
+
+                  },
+                  thumbnail: function(file, dataUrl) {
+                      if (file.previewElement) {
+                          file.previewElement.classList.remove("dz-file-preview");
+                          var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                          for (var i = 0; i < images.length; i++) {
+                              var thumbnailElement = images[i];
+                              thumbnailElement.alt = file.name;
+                              thumbnailElement.src = dataUrl;
+                              $(thumbnailElement).attr('href', file.name);
+                          }
+                          setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+
+                          keepDzAddLastChild( parseInt( $(dz).attr('data-dropzone-id'))  );
+                      }
+                  },
+                  previewTemplate: $('[js-preview-template-plans]').html()
+              });
+            })
+            // } // end if
+
+        };
+
+        // emulate dz add click
+        _document
+          .on('click', '.dz-add', function(){
+            $(this).closest('.dropzone').click();
+          })
+
+        function keepDzAddLastChild(dropzoneID){
+          var parentDropzone = $('.dropzone[data-dropzone-id="'+dropzoneID+'"]');
+          parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
+        }
     };
 
     // TAGS ADD
