@@ -360,9 +360,8 @@ $(document).ready(function() {
             $('[js-add-blog]').each(function(i, dz){
 
               // when initialized - do nothing
-              if ( $(dz).is('.dz-clickable') ){
-                return false;
-              }
+              if ( !$(dz).is('.dz-clickable') ){
+
               new Dropzone(dz, {
                   // previewTemplate: document.querySelector('#preview-template').innerHTML,
                   url: uploadUrl,
@@ -397,6 +396,8 @@ $(document).ready(function() {
                   },
                   previewTemplate: $('[js-preview-template-plans]').html()
               });
+
+              }
             })
             // } // end if
 
@@ -413,6 +414,52 @@ $(document).ready(function() {
           parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
         }
     };
+
+    // ADD SECTIONS
+    _document.on('click', '[js-add-section]', function(){
+      var lastSection = $('.property__container[data-section]').last().data('section');
+      var newSectionIndex = parseInt(lastSection) + 1;
+
+      var newSectionHtml = '<!-- dynamically added section --> ' +
+      '<h3 class="property__heading">Абзац (#'+newSectionIndex+')</h3>' +
+      '<div class="property__container" data-section="'+newSectionIndex+'">' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Заголовок (H2)</p>' +
+          '<input type="text" name="name_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Текст</p>' +
+          '<textarea class="lh-2" name="text_'+newSectionIndex+'" rows="10" data-min-rows="10"></textarea>' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Ссылка (заголовок)</p>' +
+          '<input type="text" name="link-name_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Ссылка (url)</p>' +
+          '<input type="text" name="link-url_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">YouTube (url)</p>' +
+          '<input type="text" name="youtube_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<p class="p-label">Фотографии</p>' +
+        '<div class="dropzone dropzone--smaller needsclick" js-add-blog data-dropzone-id="'+newSectionIndex+'" action="/upload" method="POST" enctype="multipart/form-data">' +
+          '<div class="dz-message needsclick">Перетащите файлы<br>или <span>открыть</span></div>' +
+          '<div class="dz-add">' +
+            '<svg class="ico ico-dz-plus">' +
+              '<use xlink:href="img/sprite.svg#ico-dz-plus"></use>' +
+            '</svg>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+
+      $(newSectionHtml).insertBefore( $(this).parent() );
+
+      initAutoExp();
+      initDropzone();
+      initSortable();
+    })
 
     // TAGS ADD
     $.expr[":"].contains = $.expr.createPseudo(function(arg) {
