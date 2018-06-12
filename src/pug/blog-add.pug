@@ -175,6 +175,19 @@ block content
               p.p-label Дата
               .right__container
                 input.datepicker(type='text' data-range='false')
+              
+              p.p-label Дата (обновлено)
+              .right__container
+                input.datepicker(type='text' data-range='false')
+
+              p.p-label Изображение записи
+              .right__container
+                .dropzone.dropzone--single.needsclick(js-add-single data-dropzone-id="99" action='/upload' method="POST" enctype="multipart/form-data")
+                  .dz-message.needsclick
+                    | Перетащите файл
+                    br
+                    span или 
+                      span открыть
 
 
   //- block footer

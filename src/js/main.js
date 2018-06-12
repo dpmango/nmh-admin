@@ -362,46 +362,97 @@ $(document).ready(function() {
               // when initialized - do nothing
               if ( !$(dz).is('.dz-clickable') ){
 
-              new Dropzone(dz, {
-                  // previewTemplate: document.querySelector('#preview-template').innerHTML,
-                  url: uploadUrl,
-                  parallelUploads: 2,
-                  thumbnailHeight: 65,
-                  thumbnailWidth: 100,
-                  maxFilesize: 3,
-                  filesizeBase: 1000,
-                  addRemoveLinks: true,
-                  success: function(file, resp){
-                    var fileName = resp.originalname;
-                    var fileUrl = uploadUrl + resp.path;
-                    setTimeout(function(){
-                      $('img[href="'+fileName+'"]').attr('href', fileUrl)
-                    }, 300);
+                new Dropzone(dz, {
+                    // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    url: uploadUrl,
+                    parallelUploads: 2,
+                    thumbnailHeight: 65,
+                    thumbnailWidth: 100,
+                    maxFilesize: 3,
+                    filesizeBase: 1000,
+                    addRemoveLinks: true,
+                    success: function(file, resp){
+                      var fileName = resp.originalname;
+                      var fileUrl = uploadUrl + resp.path;
+                      setTimeout(function(){
+                        $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                      }, 300);
 
-                  },
-                  thumbnail: function(file, dataUrl) {
-                      if (file.previewElement) {
-                          file.previewElement.classList.remove("dz-file-preview");
-                          var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-                          for (var i = 0; i < images.length; i++) {
-                              var thumbnailElement = images[i];
-                              thumbnailElement.alt = file.name;
-                              thumbnailElement.src = dataUrl;
-                              $(thumbnailElement).attr('href', file.name);
-                          }
-                          setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                    },
+                    thumbnail: function(file, dataUrl) {
+                        if (file.previewElement) {
+                            file.previewElement.classList.remove("dz-file-preview");
+                            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                            for (var i = 0; i < images.length; i++) {
+                                var thumbnailElement = images[i];
+                                thumbnailElement.alt = file.name;
+                                thumbnailElement.src = dataUrl;
+                                $(thumbnailElement).attr('href', file.name);
+                            }
+                            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
 
-                          keepDzAddLastChild( parseInt( $(dz).attr('data-dropzone-id'))  );
-                      }
-                  },
-                  previewTemplate: $('[js-preview-template-plans]').html()
-              });
+                            keepDzAddLastChild( parseInt( $(dz).attr('data-dropzone-id'))  );
+                        }
+                    },
+                    previewTemplate: $('[js-preview-template-plans]').html()
+                });
 
               }
             })
             // } // end if
 
         };
+
+        if ($("[js-add-single]").length > 0) {
+
+            $('[js-add-single]').each(function(i, dz){
+
+              // when initialized - do nothing
+              if ( !$(dz).is('.dz-clickable') ){
+
+                new Dropzone(dz, {
+                    // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    url: uploadUrl,
+                    parallelUploads: 1,
+                    maxFiles: 1,
+                    thumbnailHeight: 120,
+                    thumbnailWidth: 225,
+                    maxFilesize: 3,
+                    filesizeBase: 1000,
+                    addRemoveLinks: true,
+                    success: function(file, resp){
+                      var fileName = resp.originalname;
+                      var fileUrl = uploadUrl + resp.path;
+                      setTimeout(function(){
+                        $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                      }, 300);
+
+                    },
+                    thumbnail: function(file, dataUrl) {
+                        if (file.previewElement) {
+                            file.previewElement.classList.remove("dz-file-preview");
+                            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                            for (var i = 0; i < images.length; i++) {
+                                var thumbnailElement = images[i];
+                                thumbnailElement.alt = file.name;
+                                thumbnailElement.src = dataUrl;
+                                $(thumbnailElement).attr('href', file.name);
+                            }
+                            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                        }
+                    },
+                    init: function() {
+                      this.on("maxfilesexceeded", function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                      });
+                    }
+                });
+
+              }
+            })
+        };
+
 
         // emulate dz add click
         _document

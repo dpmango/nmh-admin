@@ -14,4 +14,4 @@ PageList:
 - file: blog-list.html
   ready: 90
 - file: blog-add.html
-  ready: 50
+  ready: 75
