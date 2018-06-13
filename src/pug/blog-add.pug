@@ -93,6 +93,8 @@ block content
             // next section
             h3.property__heading Абзац (#2)
             .property__container(data-section="2")
+              .blog-remove-section(js-remove-section)
+                +icon('ico-close')
               .ui-group
                 p.p-label Заголовок (H2)
                 input(type="text" value="Инфраструктура в КП “Антоновка”")
@@ -165,11 +167,11 @@ block content
               .right__container
                 .ui-checkbox
                   label Вячеслав Люкшин
-                    input(type="checkbox")
+                    input(type="radio" name="author")
                     span
                 .ui-checkbox
                   label Наталья Силеверстова
-                    input(type="checkbox")
+                    input(type="radio" name="author")
                     span
               
               p.p-label Дата

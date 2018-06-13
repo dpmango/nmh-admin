@@ -246,6 +246,9 @@ $(document).ready(function() {
         _document.find('.datepicker').data('datepicker');
     };
 
+    // _window.on('resize', debounce(initDatepicker, 200));
+
+
     // SORTABLE (for DZ Uploads)
     function initSortable(){
       var dropzones = $('.dropzone');
@@ -474,6 +477,9 @@ $(document).ready(function() {
       var newSectionHtml = '<!-- dynamically added section --> ' +
       '<h3 class="property__heading">Абзац (#'+newSectionIndex+')</h3>' +
       '<div class="property__container" data-section="'+newSectionIndex+'">' +
+        '<div class="blog-remove-section" js-remove-section="">' +
+          '<svg class="ico ico-close"><use xlink:href="img/sprite.svg#ico-close"></use></svg>' +
+        '</div>' +
         '<div class="ui-group">' +
           '<p class="p-label">Заголовок (H2)</p>' +
           '<input type="text" name="name_'+newSectionIndex+'" value="">' +
@@ -510,6 +516,11 @@ $(document).ready(function() {
       initAutoExp();
       initDropzone();
       initSortable();
+    })
+
+    _document.on('click', '[js-remove-section]', function(){
+      $(this).closest('.property__container').prev().remove();
+      $(this).closest('.property__container').remove();
     })
 
     // TAGS ADD
@@ -912,6 +923,8 @@ $(document).ready(function() {
                         self.html(objHtml)
                         target.html("")
                     }
+                    initDatepicker();
+                    initDropzone();
                 }
 
                 teleport();
