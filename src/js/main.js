@@ -240,10 +240,19 @@ $(document).ready(function() {
 
     // DATEPICKER
     function initDatepicker() {
-        _document.find('.datepicker').datepicker({
-            dateFormat: 'M d, yyyy'
+        _document.find('.datepicker').each(function(i, el){
+          var picker = $(el).datepicker({
+              dateFormat: 'M d, yyyy'
+          }).data('datepicker');
+
+          $('.datepicker').removeClass('active');
+
+          // picker.destroy();
         });
-        _document.find('.datepicker').data('datepicker');
+        // _document.find('.datepicker').datepicker({
+        //     dateFormat: 'M d, yyyy'
+        // });
+        // _document.find('.datepicker').data('datepicker');
     };
 
     // _window.on('resize', debounce(initDatepicker, 200));
