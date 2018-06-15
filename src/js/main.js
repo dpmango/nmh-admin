@@ -244,15 +244,10 @@ $(document).ready(function() {
           var picker = $(el).datepicker({
               dateFormat: 'M d, yyyy'
           }).data('datepicker');
-
-          $('.datepicker').removeClass('active');
-
           // picker.destroy();
         });
-        // _document.find('.datepicker').datepicker({
-        //     dateFormat: 'M d, yyyy'
-        // });
-        // _document.find('.datepicker').data('datepicker');
+        $('.datepicker').removeClass('active');
+
     };
 
     // _window.on('resize', debounce(initDatepicker, 200));
