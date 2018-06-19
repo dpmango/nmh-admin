@@ -2,12 +2,16 @@ ProjectTitle: NMH-admin
 
 PageList:
 - file: property-list.html
-  ready: 90
+  ready: 100
 - file: property-add.html
-  ready: 90
+  ready: 100
 - file: categories.html
-  ready: 90
+  ready: 100
 - file: tags.html
-  ready: 90
+  ready: 100
 - file: login.html
+  ready: 100
+- file: blog-list.html
+  ready: 90
+- file: blog-add.html
   ready: 90

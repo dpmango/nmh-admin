@@ -45,7 +45,8 @@
   .dz-message
     position: absolute
     top: 50%
-    transform: translateY(-50%)
+    left: 50%
+    transform: translate(-50%, -50%)
     margin: 0
     font-size: 14px
     line-height: 2
@@ -338,6 +339,52 @@
   .dz-image
     &::before, &::after
       display: none
+
+
+/* Modifiers
+.dropzone--smaller
+  min-height: 175px
+  &::after
+    opacity: 1
+    border: 1px dashed #F6F6F6
+  &.dz-drag-hover
+    &::after
+      border: 1px solid $colorPrimary
+
+
+.dropzone--single
+  min-height: 120px
+  padding: 0
+  display: flex
+  &::after
+    opacity: 1
+    border: 1px dashed #F6F6F6
+  &.dz-drag-hover
+    &::after
+      border: 1px solid $colorPrimary
+  .dz-message
+    line-height: 1.4
+    span
+      font-size: 12px
+      border-bottom: 0
+      color: $fontColor50
+      &:hover
+        color: $fontColor50
+      span
+        color: rgba(#359BE0, .5)
+        border-bottom: 1px solid #359BE0
+        &:hover
+          color: #359BE0
+  .dz-preview
+    flex: 0 0 100%
+    height: 120px
+    margin: 0
+    .dz-image
+      width: 100%
+      height: 120px
+    .dz-error-message
+      left: 50%
+      transform: translateX(-50%)
 
 @-webkit-keyframes passing-through
   0%

@@ -240,11 +240,18 @@ $(document).ready(function() {
 
     // DATEPICKER
     function initDatepicker() {
-        $('.datepicker').datepicker({
-            dateFormat: 'M d, yyyy'
+        _document.find('.datepicker').each(function(i, el){
+          var picker = $(el).datepicker({
+              dateFormat: 'M d, yyyy'
+          }).data('datepicker');
+          // picker.destroy();
         });
-        $('.datepicker').data('datepicker');
+        $('.datepicker').removeClass('active');
+
     };
+
+    // _window.on('resize', debounce(initDatepicker, 200));
+
 
     // SORTABLE (for DZ Uploads)
     function initSortable(){
@@ -266,12 +273,12 @@ $(document).ready(function() {
     // ADD PHOTOS - DROPZONE JS
     var dropzone, dropzone2;
     function initDropzone() {
+        Dropzone.autoDiscover = false;
+
+        var uploadUrl = "http://nmh.khmelevskoy.club/";
+        // var uploadUrl = "http://localhost:8090/";
+
         if ($("[js-add-photos]").length > 0) {
-
-            Dropzone.autoDiscover = false;
-
-            var uploadUrl = "http://nmh.khmelevskoy.club/";
-            // var uploadUrl = "http://localhost:8090/";
 
             if ( !dropzone ){
 
@@ -310,6 +317,9 @@ $(document).ready(function() {
 
             } // end if
 
+        }
+
+        if ($("[js-add-plans]").length > 0) {
             // plans
             if ( !dropzone2 ){
               dropzone2 = new Dropzone('[js-add-plans]', {
@@ -349,18 +359,173 @@ $(document).ready(function() {
 
             } // end if
 
-            // emulate dz add click
-            _document
-              .on('click', '.dz-add', function(){
-                $(this).closest('.dropzone').click();
-              })
-
-            function keepDzAddLastChild(dropzoneID){
-              var parentDropzone = $('.dropzone[data-dropzone-id="'+dropzoneID+'"]');
-              parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
-            }
         };
+
+        if ($("[js-add-blog]").length > 0) {
+            // plans
+            // if ( !dropzone2 ){
+            $('[js-add-blog]').each(function(i, dz){
+
+              // when initialized - do nothing
+              if ( !$(dz).is('.dz-clickable') ){
+
+                new Dropzone(dz, {
+                    // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    url: uploadUrl,
+                    parallelUploads: 2,
+                    thumbnailHeight: 65,
+                    thumbnailWidth: 100,
+                    maxFilesize: 3,
+                    filesizeBase: 1000,
+                    addRemoveLinks: true,
+                    success: function(file, resp){
+                      var fileName = resp.originalname;
+                      var fileUrl = uploadUrl + resp.path;
+                      setTimeout(function(){
+                        $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                      }, 300);
+
+                    },
+                    thumbnail: function(file, dataUrl) {
+                        if (file.previewElement) {
+                            file.previewElement.classList.remove("dz-file-preview");
+                            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                            for (var i = 0; i < images.length; i++) {
+                                var thumbnailElement = images[i];
+                                thumbnailElement.alt = file.name;
+                                thumbnailElement.src = dataUrl;
+                                $(thumbnailElement).attr('href', file.name);
+                            }
+                            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+
+                            keepDzAddLastChild( parseInt( $(dz).attr('data-dropzone-id'))  );
+                        }
+                    },
+                    previewTemplate: $('[js-preview-template-plans]').html()
+                });
+
+              }
+            })
+            // } // end if
+
+        };
+
+        if ($("[js-add-single]").length > 0) {
+
+            $('[js-add-single]').each(function(i, dz){
+
+              // when initialized - do nothing
+              if ( !$(dz).is('.dz-clickable') ){
+
+                new Dropzone(dz, {
+                    // previewTemplate: document.querySelector('#preview-template').innerHTML,
+                    url: uploadUrl,
+                    parallelUploads: 1,
+                    maxFiles: 1,
+                    thumbnailHeight: 120,
+                    thumbnailWidth: 225,
+                    maxFilesize: 3,
+                    filesizeBase: 1000,
+                    addRemoveLinks: true,
+                    success: function(file, resp){
+                      var fileName = resp.originalname;
+                      var fileUrl = uploadUrl + resp.path;
+                      setTimeout(function(){
+                        $('img[href="'+fileName+'"]').attr('href', fileUrl)
+                      }, 300);
+
+                    },
+                    thumbnail: function(file, dataUrl) {
+                        if (file.previewElement) {
+                            file.previewElement.classList.remove("dz-file-preview");
+                            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                            for (var i = 0; i < images.length; i++) {
+                                var thumbnailElement = images[i];
+                                thumbnailElement.alt = file.name;
+                                thumbnailElement.src = dataUrl;
+                                $(thumbnailElement).attr('href', file.name);
+                            }
+                            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+                        }
+                    },
+                    init: function() {
+                      this.on("maxfilesexceeded", function(file) {
+                        this.removeAllFiles();
+                        this.addFile(file);
+                      });
+                    }
+                });
+
+              }
+            })
+        };
+
+
+        // emulate dz add click
+        _document
+          .on('click', '.dz-add', function(){
+            $(this).closest('.dropzone').click();
+          })
+
+        function keepDzAddLastChild(dropzoneID){
+          var parentDropzone = $('.dropzone[data-dropzone-id="'+dropzoneID+'"]');
+          parentDropzone.find('.dz-add').insertAfter('.dropzone[data-dropzone-id="'+dropzoneID+'"] .dz-preview:last-child');
+        }
     };
+
+    // ADD SECTIONS
+    _document.on('click', '[js-add-section]', function(){
+      var lastSection = $('.property__container[data-section]').last().data('section');
+      var newSectionIndex = parseInt(lastSection) + 1;
+
+      var newSectionHtml = '<!-- dynamically added section --> ' +
+      '<h3 class="property__heading">Абзац (#'+newSectionIndex+')</h3>' +
+      '<div class="property__container" data-section="'+newSectionIndex+'">' +
+        '<div class="blog-remove-section" js-remove-section="">' +
+          '<svg class="ico ico-close"><use xlink:href="img/sprite.svg#ico-close"></use></svg>' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Заголовок (H2)</p>' +
+          '<input type="text" name="name_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Текст</p>' +
+          '<textarea class="lh-2" name="text_'+newSectionIndex+'" rows="10" data-min-rows="10"></textarea>' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Ссылка (заголовок)</p>' +
+          '<input type="text" name="link-name_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">Ссылка (url)</p>' +
+          '<input type="text" name="link-url_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<div class="ui-group">' +
+          '<p class="p-label">YouTube (url)</p>' +
+          '<input type="text" name="youtube_'+newSectionIndex+'" value="">' +
+        '</div>' +
+        '<p class="p-label">Фотографии</p>' +
+        '<div class="dropzone dropzone--smaller needsclick" js-add-blog data-dropzone-id="'+newSectionIndex+'" action="/upload" method="POST" enctype="multipart/form-data">' +
+          '<div class="dz-message needsclick">Перетащите файлы<br>или <span>открыть</span></div>' +
+          '<div class="dz-add">' +
+            '<svg class="ico ico-dz-plus">' +
+              '<use xlink:href="img/sprite.svg#ico-dz-plus"></use>' +
+            '</svg>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+
+      $(newSectionHtml).insertBefore( $(this).parent() );
+
+      initAutoExp();
+      initDropzone();
+      initSortable();
+    })
+
+    _document.on('click', '[js-remove-section]', function(){
+      $(this).closest('.property__container').prev().remove();
+      $(this).closest('.property__container').remove();
+    })
 
     // TAGS ADD
     $.expr[":"].contains = $.expr.createPseudo(function(arg) {
@@ -456,12 +621,13 @@ $(document).ready(function() {
             this.value = savedValue;
         })
         $(textarea).on('input.autoExpand', function() {
-            var minRows = this.getAttribute('data-min-rows') | 0,
-                rows;
+            var minRows = this.getAttribute('data-min-rows') | 0
+            var rows;
             this.rows = minRows;
-            rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+            rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / parseInt( $(this).css('line-height')))
             this.rows = minRows + rows;
         });
+        // $(textarea).trigger('input.autoExpand')
       })
     }
 
@@ -761,6 +927,8 @@ $(document).ready(function() {
                         self.html(objHtml)
                         target.html("")
                     }
+                    initDatepicker();
+                    initDropzone();
                 }
 
                 teleport();

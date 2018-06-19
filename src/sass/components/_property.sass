@@ -37,12 +37,15 @@
 		margin: 25px auto
 		padding-bottom: 22px
 	&__container
+		position: relative
 		background: #fff
 		border-radius: 4px
 		border: 1px solid $borderColor
 		padding: 20px
 		&--photos
 			padding: 0
+		&--add
+			margin: 30px 0 10px
 		// 	min-height: 360px
 		.ui-group
 			&:last-child
@@ -136,6 +139,31 @@
 			input
 				opacity: 1
 				text-align: center
+
+	&__add
+		min-height: 110px
+		display: flex
+		flex-direction: column
+		text-align: center
+		align-items: center
+		justify-content: center
+		color: $fontColor50
+		transition: .25s $ease
+		.ico
+			font-size: 25px
+			fill: #D8D8D8
+			transition: .25s $ease
+		span
+			display: inline-block
+			margin-top: 13px
+			font-size: 14px
+			// font-weight: 700
+		&:hover
+			color: $fontColor
+			.ico
+				fill: $colorPrimary
+
+
 
 .ui-group--date
 	max-width: 252px

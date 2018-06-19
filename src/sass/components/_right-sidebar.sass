@@ -64,3 +64,23 @@
 	    transform-origin: center center
 		&:hover
 			transform: rotate(180deg) translateY(50%)
+
+
+.right, .sidebar
+	.ui-group--date
+		margin: 5px auto 20px
+		// overflow: hidden
+		input
+			box-sizing: border-box
+			display: inline-block
+			// width: 200px
+			width: 100%
+			max-width: 100%
+			min-width: 1px
+			opacity: 1
+			text-align: center
+			position: static
+			padding: 14px 20px
+			border: 1px solid $borderColor
+			&:focus
+				border-color: $colorPrimary
